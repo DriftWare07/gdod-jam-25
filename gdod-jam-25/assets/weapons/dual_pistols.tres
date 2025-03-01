@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://c07we68aw1pgt"]
+
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_347rr"]
+[ext_resource type="PackedScene" uid="uid://d21qnpvmbxd6m" path="res://scenes/bullets/pistol_bullet.tscn" id="1_qvcro"]
+[ext_resource type="AudioStream" uid="uid://dblf3ol2yxg8d" path="res://assets/sounds/762x54r Single MP3.mp3" id="3_vkjj6"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tlpwv"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("3_vkjj6")
+
+[resource]
+script = ExtResource("1_347rr")
+weapon_name = "Gun"
+animation_name = "dual pistols"
+fire_delay = 0.25
+damage = 1
+max_ammo = 34
+muzzle_locations = Array[Vector2]([Vector2(6, 4.5), Vector2(6, -4.5)])
+bullet_instance = ExtResource("1_qvcro")
+sound = SubResource("AudioStreamRandomizer_tlpwv")

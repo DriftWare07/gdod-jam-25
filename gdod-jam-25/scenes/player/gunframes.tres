@@ -1,0 +1,90 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://cjje8uhj174is"]
+
+[ext_resource type="Texture2D" uid="uid://csutg0lmxfv4b" path="res://assets/gdodjam25_weapons.png" id="1_1nebu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbd5i"]
+atlas = ExtResource("1_1nebu")
+region = Rect2(48, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tng15"]
+atlas = ExtResource("1_1nebu")
+region = Rect2(0, 64, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2wuu"]
+atlas = ExtResource("1_1nebu")
+region = Rect2(0, 160, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuiri"]
+atlas = ExtResource("1_1nebu")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rljau"]
+atlas = ExtResource("1_1nebu")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubrg1"]
+atlas = ExtResource("1_1nebu")
+region = Rect2(0, 96, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd5ka"]
+atlas = ExtResource("1_1nebu")
+region = Rect2(0, 128, 64, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbd5i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tng15")
+}],
+"loop": true,
+"name": &"dual pistols",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2wuu")
+}],
+"loop": true,
+"name": &"grenade_launcher",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuiri")
+}],
+"loop": true,
+"name": &"pencil_crossbow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rljau")
+}],
+"loop": true,
+"name": &"pistol",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubrg1")
+}],
+"loop": true,
+"name": &"rifle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd5ka")
+}],
+"loop": true,
+"name": &"steak_gun",
+"speed": 5.0
+}]

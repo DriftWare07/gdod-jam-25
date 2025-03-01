@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://p4hljsvfcd10"]
+
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_hd2gf"]
+[ext_resource type="PackedScene" uid="uid://d21qnpvmbxd6m" path="res://scenes/bullets/pistol_bullet.tscn" id="1_ovwwf"]
+[ext_resource type="AudioStream" uid="uid://dblf3ol2yxg8d" path="res://assets/sounds/762x54r Single MP3.mp3" id="3_pum02"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ghxuq"]
+random_pitch = 1.2
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("3_pum02")
+
+[resource]
+script = ExtResource("1_hd2gf")
+weapon_name = "Gun"
+animation_name = "pistol"
+fire_delay = 0.5
+damage = 1
+max_ammo = 17
+muzzle_locations = Array[Vector2]([Vector2(6, 4.5)])
+bullet_instance = ExtResource("1_ovwwf")
+sound = SubResource("AudioStreamRandomizer_ghxuq")
