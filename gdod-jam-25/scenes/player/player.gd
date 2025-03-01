@@ -19,6 +19,6 @@ func _physics_process(delta: float) -> void:
 	if input.length() > 0: velocity += input*accel
 	else: velocity = velocity.lerp(Vector2.ZERO, decel*delta)
 	
-	
+	velocity = velocity.clamp(Vector2(-speed,-speed), Vector2(speed,speed))
 	
 	move_and_slide()

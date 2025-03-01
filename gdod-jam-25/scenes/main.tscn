@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfa5pv2mqfceh"]
+[gd_scene load_steps=6 format=3 uid="uid://bfa5pv2mqfceh"]
 
 [ext_resource type="Texture2D" uid="uid://b5x8vr822pve2" path="res://assets/gdodjam25tiles.png" id="1_rq6ol"]
 [ext_resource type="PackedScene" uid="uid://bxccx43ua8hgq" path="res://scenes/player/player.tscn" id="2_i30qc"]
@@ -19,6 +19,9 @@ texture = ExtResource("1_rq6ol")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_jae4e")
 
+[sub_resource type="Environment" id="Environment_q4j4f"]
+background_energy_multiplier = 0.0
+
 [node name="main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -28,3 +31,6 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0
 
 [node name="player" parent="." instance=ExtResource("2_i30qc")]
 position = Vector2(129, 126)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q4j4f")
