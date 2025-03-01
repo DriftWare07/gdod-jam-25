@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3 uid="uid://bxccx43ua8hgq"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_1jfvs"]
+[ext_resource type="SpriteFrames" uid="uid://br5woktbyhfk2" path="res://scenes/player/playerframes.tres" id="1_miq4j"]
+[ext_resource type="Script" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="2_cw312"]
+[ext_resource type="Texture2D" uid="uid://b5x8vr822pve2" path="res://assets/gdodjam25tiles.png" id="2_ybbbr"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="3_t0gkm"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector2/ShakerTypeSineWave2D.gd" id="4_4a006"]
+[ext_resource type="Script" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="4_kvuxx"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="6_6w8ue"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwp0u"]
+radius = 7.07107
+
+[sub_resource type="Resource" id="Resource_by4j2"]
+script = ExtResource("4_4a006")
+frequency = Vector2(1, 1)
+phase = Vector2(1, 1)
+amplitude = Vector2(1, 1)
+offset = Vector2(0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Resource" id="Resource_6a8ul"]
+script = ExtResource("6_6w8ue")
+PositionShake = Array[ExtResource("3_t0gkm")]([SubResource("Resource_by4j2")])
+RotationShake = Array[ExtResource("4_kvuxx")]([])
+ScaleShake = Array[ExtResource("3_t0gkm")]([])
+bake_internal = 64
+__follow_timeline = false
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(0.0949757, 0.137363)
+script = ExtResource("1_1jfvs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dwp0u")
+
+[node name="legs" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_miq4j")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.110374
+
+[node name="body" type="Sprite2D" parent="."]
+texture = ExtResource("2_ybbbr")
+region_enabled = true
+region_rect = Rect2(64, 0, 16, 15)
+
+[node name="gunhand" type="Node2D" parent="body"]
+position = Vector2(3.90502, 4.86264)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-0.0757632, -0.148825)
+zoom = Vector2(4, 4)
+rotation_smoothing_enabled = true
+
+[node name="ShakerComponent2D" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("Targets")]
+script = ExtResource("2_cw312")
+custom_target = true
+Targets = [NodePath("..")]
+is_playing = true
+AutoPlay = true
+intensity = 0.167
+shakerPreset = SubResource("Resource_6a8ul")
