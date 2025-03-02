@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfa5pv2mqfceh"]
+[gd_scene load_steps=11 format=3 uid="uid://bfa5pv2mqfceh"]
 
 [ext_resource type="Texture2D" uid="uid://b5x8vr822pve2" path="res://assets/gdodjam25tiles.png" id="1_rq6ol"]
 [ext_resource type="PackedScene" uid="uid://bxccx43ua8hgq" path="res://scenes/player/player.tscn" id="2_i30qc"]
 [ext_resource type="PackedScene" uid="uid://bxv2wq14mx3ta" path="res://scenes/bullets/weapon_drop.tscn" id="3_6npgh"]
+[ext_resource type="AudioStream" uid="uid://b2gxsq5docajf" path="res://assets/sounds/elevator panic ideaz.mp3" id="4_nadpv"]
+[ext_resource type="Script" path="res://scripts/effect_fader.gd" id="5_jkce5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jae4e"]
 texture = ExtResource("1_rq6ol")
@@ -26,6 +28,14 @@ glow_enabled = true
 glow_normalized = true
 glow_blend_mode = 0
 
+[sub_resource type="Animation" id="Animation_uqkkl"]
+resource_name = "reverb in"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kl2nk"]
+_data = {
+"reverb in": SubResource("Animation_uqkkl")
+}
+
 [node name="main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -41,3 +51,14 @@ environment = SubResource("Environment_q4j4f")
 
 [node name="WeaponDrop" parent="." instance=ExtResource("3_6npgh")]
 position = Vector2(67, 115)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nadpv")
+autoplay = true
+bus = &"music"
+script = ExtResource("5_jkce5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AudioStreamPlayer"]
+libraries = {
+"": SubResource("AnimationLibrary_kl2nk")
+}

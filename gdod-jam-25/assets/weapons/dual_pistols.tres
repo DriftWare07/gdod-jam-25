@@ -11,7 +11,7 @@ stream_0/stream = ExtResource("3_vkjj6")
 
 [resource]
 script = ExtResource("1_347rr")
-weapon_name = "Gun"
+weapon_name = "Dual Pistols"
 animation_name = "dual pistols"
 fire_delay = 0.25
 damage = 1

@@ -23,7 +23,9 @@ func _process(delta: float) -> void:
 	leg_sprite.rotation = lerp_angle(leg_sprite.rotation, body_sprite.rotation, delta*5)
 	update_weapons()
 	
-	
+	var conv = Vector2i(get_viewport().get_mouse_position().x, get_viewport().get_mouse_position().y)
+	var mouse_offset = (conv - get_viewport().size / 2)
+	$Camera2D.position = $Camera2D.position.lerp( mouse_offset/5, delta)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -55,6 +57,7 @@ func update_weapons():
 		var sstream = AudioStreamPlayer.new()
 		add_child(sstream)
 		sstream.stream = weapon.sound
+		sstream.bus = AudioServer.get_bus_name(2)
 		sstream.play()
 		sstream.finished.connect(sstream.queue_free)
 		

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_qx1kx")
-weapon_name = "Gun"
+weapon_name = "Assault Rifle"
 animation_name = "rifle"
 fire_delay = 0.1
 damage = 1
