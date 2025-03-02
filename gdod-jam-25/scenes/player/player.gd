@@ -13,11 +13,10 @@ class_name player
 @onready var firetimer = $firetimer
 @onready var bullet_sound = $bullet_sound
 
-var can_shoot = false
+var can_shoot = true
 var ammo = 1
 
-func _ready() -> void:
-	firetimer.start(weapon.fire_delay)
+
 
 func _process(delta: float) -> void:
 	body_sprite.look_at(get_global_mouse_position())
@@ -29,6 +28,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	var input = Input.get_vector("left","right","up","down").normalized()
+	leg_sprite.speed_scale = input.length()
 	
 	if input.length() > 0: velocity += input*accel
 	else: velocity = velocity.lerp(Vector2.ZERO, decel*delta)
@@ -52,7 +52,12 @@ func update_weapons():
 		i.global_position = $body/muzzle.global_position
 		i.look_at(get_global_mouse_position())
 		
-		bullet_sound.stream = weapon.sound
+		var sstream = AudioStreamPlayer.new()
+		add_child(sstream)
+		sstream.stream = weapon.sound
+		sstream.play()
+		sstream.finished.connect(sstream.queue_free)
+		
 		bullet_sound.play()
 		
 		ammo -= 1

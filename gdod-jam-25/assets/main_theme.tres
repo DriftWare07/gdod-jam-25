@@ -1,0 +1,48 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://2bek0awd3xii"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bw67"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.5, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.834614, 0.834614, 0.834614, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="SystemFont" id="SystemFont_mwhbv"]
+font_names = PackedStringArray("Kenney Future")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddt15"]
+bg_color = Color(0.807781, 0, 0.196409, 1)
+skew = Vector2(0.5, 0)
+border_color = Color(0.245, 0.245, 0.245, 0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ju70s"]
+bg_color = Color(0, 0.72378, 0.250524, 1)
+skew = Vector2(0.5, 0)
+border_width_right = 10
+border_color = Color(0.941615, 0.736532, 0.024291, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="SystemFont" id="SystemFont_v4eqd"]
+font_names = PackedStringArray("Kenney Future")
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxFlat_8bw67")
+ProgressBar/font_sizes/font_size = 32
+ProgressBar/fonts/font = SubResource("SystemFont_mwhbv")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_ddt15")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_ju70s")
+RichTextLabel/font_sizes/normal_font_size = 32
+RichTextLabel/fonts/normal_font = SubResource("SystemFont_v4eqd")

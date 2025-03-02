@@ -11,6 +11,6 @@ animation_name = "rifle"
 fire_delay = 0.1
 damage = 1
 max_ammo = 30
-muzzle_locations = Array[Vector2]([Vector2(6, 8)])
+muzzle_locations = Array[Vector2]([Vector2(12, 6)])
 bullet_instance = ExtResource("1_owv1l")
 sound = ExtResource("3_gtv5l")
