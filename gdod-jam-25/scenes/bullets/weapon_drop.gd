@@ -23,5 +23,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is player and is_visible:
 		body.pickup_weapon(selected_weapon)
 		is_visible = false
+		$reloadsfx.play()
 		hide()
 		$Timer.start()

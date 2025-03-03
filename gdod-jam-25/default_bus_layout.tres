@@ -10,6 +10,7 @@ spread = 0.73
 wet = 0.68
 
 [sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_tx4tt"]
+buffer_length = 0.5
 
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectSpectrumAnalyzer_wyi1p")

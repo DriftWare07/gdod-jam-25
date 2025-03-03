@@ -16,7 +16,8 @@ class_name player
 var can_shoot = true
 var ammo = 1
 
-
+func _ready() -> void:
+	Global.Player = self
 
 func _process(delta: float) -> void:
 	body_sprite.look_at(get_global_mouse_position())
@@ -30,7 +31,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	var input = Input.get_vector("left","right","up","down").normalized()
-	leg_sprite.speed_scale = input.length()
+	leg_sprite.speed_scale = velocity.length()/50
 	
 	if input.length() > 0: velocity += input*accel
 	else: velocity = velocity.lerp(Vector2.ZERO, decel*delta)

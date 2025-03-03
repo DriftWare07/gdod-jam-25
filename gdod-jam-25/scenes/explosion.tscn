@@ -1,0 +1,203 @@
+[gd_scene load_steps=12 format=3 uid="uid://b0muqpw3k8j1r"]
+
+[ext_resource type="AudioStream" uid="uid://b0lnuyq0peu21" path="res://assets/sounds/Bluezone_BC0277_explosion_urban_004_02.wav" id="1_06lab"]
+[ext_resource type="Script" path="res://scenes/explosion.gd" id="1_l8tol"]
+
+[sub_resource type="Animation" id="Animation_i8j82"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shockwave:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shockwave:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shockwave2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sparks:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_34ako"]
+resource_name = "explode"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shockwave:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1.93187, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shockwave:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.233333, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shockwave2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(4, 4, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.25, 0.25), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sparks:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5j50w"]
+_data = {
+"RESET": SubResource("Animation_i8j82"),
+"explode": SubResource("Animation_34ako")
+}
+
+[sub_resource type="Gradient" id="Gradient_2qlga"]
+offsets = PackedFloat32Array(0.458333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g2st7"]
+gradient = SubResource("Gradient_2qlga")
+
+[sub_resource type="Curve" id="Curve_gs84t"]
+_data = [Vector2(0.453608, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_25yw2"]
+curve = SubResource("Curve_gs84t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eirpm"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 755.5
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_25yw2")
+color = Color(1, 0.933333, 0, 1)
+color_ramp = SubResource("GradientTexture1D_g2st7")
+turbulence_noise_strength = 0.2
+turbulence_influence_min = 0.03
+turbulence_influence_max = 0.03
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1tfqa"]
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_l8tol")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5j50w")
+}
+
+[node name="shockwave" type="Polygon2D" parent="."]
+color = Color(2, 1.6, 0.3, 1)
+polygon = PackedVector2Array(0, -16, 8, -16, 16, -8, 16, 0, 16, 8, 8, 16, 0, 16, -8, 16, -16, 8, -16, 0, -16, -8, -8, -16)
+
+[node name="shockwave2" type="Polygon2D" parent="."]
+scale = Vector2(0.2, 0.2)
+polygon = PackedVector2Array(0, -16, 8, -16, 16, -8, 16, 0, 16, 8, 8, 16, 0, 16, -8, 16, -16, 8, -16, 0, -16, -8, -8, -16)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_06lab")
+volume_db = 10.0
+bus = &"music"
+
+[node name="sparks" type="GPUParticles2D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_eirpm")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="blast radius" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blast radius"]
+shape = SubResource("CircleShape2D_1tfqa")

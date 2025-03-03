@@ -7,3 +7,8 @@ func damage(dmg):
 	if health_component == null: return
 	
 	health_component.damage(dmg)
+
+func kill():
+	if health_component == null: return
+	
+	health_component.damage(100000000000)

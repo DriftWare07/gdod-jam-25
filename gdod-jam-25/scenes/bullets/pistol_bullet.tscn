@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d21qnpvmbxd6m"]
+[gd_scene load_steps=5 format=3 uid="uid://d21qnpvmbxd6m"]
 
 [ext_resource type="Script" path="res://scripts/linetrail.gd" id="1_c6k8p"]
 [ext_resource type="Script" path="res://scenes/bullets/bullet.gd" id="1_unm4s"]
@@ -7,7 +7,10 @@
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="PistolBullet" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_np2q2"]
+radius = 2.0
+
+[node name="PistolBullet" type="Area2D"]
 script = ExtResource("1_unm4s")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
@@ -19,3 +22,8 @@ width = 2.0
 width_curve = SubResource("Curve_s05lo")
 default_color = Color(1, 1, 0, 1)
 script = ExtResource("1_c6k8p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_np2q2")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

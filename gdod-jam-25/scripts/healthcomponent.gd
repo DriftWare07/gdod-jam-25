@@ -12,7 +12,7 @@ signal dead
 @export var max_health = 100.0
 @export var health = 100.0
 @export var iframes = 0.4
-
+@export var regenerate = false
 
 
 @export var reload_scene_on_death = false
@@ -23,6 +23,9 @@ var invframes = 0
 
 func _process(delta: float) -> void:
 	invframes -= delta
+	health = clamp(health,0, max_health)
+	if regenerate:
+		health += (max_health/50)*delta
 
 
 func damage(dmg):

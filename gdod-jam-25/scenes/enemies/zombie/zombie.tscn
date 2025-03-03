@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://256aql77ixgf"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_3pj5x"]
+[ext_resource type="Texture2D" uid="uid://cc73fyq7vqd6l" path="res://assets/gdodjam25enemies.png" id="1_6yfi7"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="2_5l3iw"]
+[ext_resource type="Script" path="res://scripts/healthcomponent.gd" id="3_4oc2j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8v0g"]
+atlas = ExtResource("1_6yfi7")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_648bm"]
+atlas = ExtResource("1_6yfi7")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nwqq2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8v0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_648bm")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwirq"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i7l4s"]
+radius = 8.90608
+
+[node name="Zombie" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_3pj5x")
+speed = 50
+decel = 0.7
+
+[node name="legs" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_nwqq2")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="body" type="Sprite2D" parent="."]
+texture = ExtResource("1_6yfi7")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vwirq")
+
+[node name="hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("2_5l3iw")
+health_component = NodePath("../Health_Component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_i7l4s")
+debug_color = Color(0.739454, 0, 0.0252916, 0.42)
+
+[node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
+script = ExtResource("3_4oc2j")
+host = NodePath("..")
+delete_host_on_death = false
+max_health = 3.0
+health = 3.0
+iframes = 0.0
+
+[connection signal="dead" from="Health_Component" to="." method="dead"]

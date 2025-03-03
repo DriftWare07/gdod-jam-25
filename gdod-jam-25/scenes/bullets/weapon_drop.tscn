@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxv2wq14mx3ta"]
+[gd_scene load_steps=14 format=3 uid="uid://bxv2wq14mx3ta"]
 
 [ext_resource type="SpriteFrames" uid="uid://cjje8uhj174is" path="res://scenes/player/gunframes.tres" id="1_6j4yv"]
 [ext_resource type="Script" path="res://scenes/bullets/weapon_drop.gd" id="1_evoxe"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://p4hljsvfcd10" path="res://assets/weapons/pistol.tres" id="3_n4j5l"]
 [ext_resource type="Resource" uid="uid://c07we68aw1pgt" path="res://assets/weapons/dual_pistols.tres" id="4_ajss5"]
 [ext_resource type="Resource" uid="uid://db650owq8hjwn" path="res://assets/weapons/machine_gun.tres" id="5_w5pn2"]
+[ext_resource type="AudioStream" uid="uid://nw8v3x2wulxp" path="res://assets/sounds/155388__woodmoose__guncock.wav" id="7_hyy2l"]
 
 [sub_resource type="Curve" id="Curve_kqpwr"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -58,6 +59,11 @@ shape = SubResource("CircleShape2D_dk00k")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
+
+[node name="reloadsfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_hyy2l")
+volume_db = 20.0
+bus = &"sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="appear"]
