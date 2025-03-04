@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://bxv2wq14mx3ta" path="res://scenes/bullets/weapon_drop.tscn" id="3_6npgh"]
 [ext_resource type="PackedScene" uid="uid://c2ysjggihyfw6" path="res://scenes/tile.tscn" id="3_imgsh"]
 [ext_resource type="AudioStream" uid="uid://b2gxsq5docajf" path="res://assets/sounds/elevator panic ideaz.mp3" id="4_nadpv"]
-[ext_resource type="Script" path="res://scripts/effect_fader.gd" id="5_jkce5"]
+[ext_resource type="Script" uid="uid://cxo358s5fa227" path="res://scripts/effect_fader.gd" id="5_jkce5"]
 [ext_resource type="PackedScene" uid="uid://256aql77ixgf" path="res://scenes/enemies/zombie/zombie.tscn" id="6_5frl0"]
-[ext_resource type="Script" path="res://scripts/spawnpath.gd" id="8_mg6wa"]
+[ext_resource type="Script" uid="uid://d37gk7e47v580" path="res://scripts/spawnpath.gd" id="8_mg6wa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jae4e"]
 texture = ExtResource("1_rq6ol")
@@ -46,7 +46,7 @@ resource_name = "reverb in"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kl2nk"]
 _data = {
-"reverb in": SubResource("Animation_uqkkl")
+&"reverb in": SubResource("Animation_uqkkl")
 }
 
 [sub_resource type="Curve2D" id="Curve2D_2ekri"]
@@ -79,7 +79,7 @@ script = ExtResource("5_jkce5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AudioStreamPlayer"]
 libraries = {
-"": SubResource("AnimationLibrary_kl2nk")
+&"": SubResource("AnimationLibrary_kl2nk")
 }
 
 [node name="Zombie" parent="." instance=ExtResource("6_5frl0")]

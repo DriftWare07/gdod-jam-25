@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://bxv2wq14mx3ta"]
 
 [ext_resource type="SpriteFrames" uid="uid://cjje8uhj174is" path="res://scenes/player/gunframes.tres" id="1_6j4yv"]
-[ext_resource type="Script" path="res://scenes/bullets/weapon_drop.gd" id="1_evoxe"]
-[ext_resource type="Script" path="res://scripts/weapon.gd" id="2_khook"]
+[ext_resource type="Script" uid="uid://drkvn6cipqsf2" path="res://scenes/bullets/weapon_drop.gd" id="1_evoxe"]
+[ext_resource type="Script" uid="uid://bbo57s7n26tp1" path="res://scripts/weapon.gd" id="2_khook"]
 [ext_resource type="Resource" uid="uid://p4hljsvfcd10" path="res://assets/weapons/pistol.tres" id="3_n4j5l"]
 [ext_resource type="Resource" uid="uid://c07we68aw1pgt" path="res://assets/weapons/dual_pistols.tres" id="4_ajss5"]
 [ext_resource type="Resource" uid="uid://db650owq8hjwn" path="res://assets/weapons/machine_gun.tres" id="5_w5pn2"]
@@ -13,7 +13,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vec
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_4lygr"]
-max_value = 5.0
+_limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.471014, 2.47253), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -45,8 +45,8 @@ weapon_drops = Array[ExtResource("2_khook")]([ExtResource("3_n4j5l"), ExtResourc
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 100
-process_material = SubResource("ParticleProcessMaterial_pj4ps")
 lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_pj4ps")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(18, 8.5)

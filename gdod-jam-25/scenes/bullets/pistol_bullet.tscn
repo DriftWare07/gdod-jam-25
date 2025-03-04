@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d21qnpvmbxd6m"]
 
-[ext_resource type="Script" path="res://scripts/linetrail.gd" id="1_c6k8p"]
-[ext_resource type="Script" path="res://scenes/bullets/bullet.gd" id="1_unm4s"]
+[ext_resource type="Script" uid="uid://yocg7pcwe8r4" path="res://scripts/linetrail.gd" id="1_c6k8p"]
+[ext_resource type="Script" uid="uid://b82d625h7m6ll" path="res://scenes/bullets/bullet.gd" id="1_unm4s"]
 
 [sub_resource type="Curve" id="Curve_s05lo"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

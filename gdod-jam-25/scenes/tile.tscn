@@ -1,15 +1,15 @@
 [gd_scene load_steps=18 format=3 uid="uid://c2ysjggihyfw6"]
 
-[ext_resource type="Script" path="res://scripts/hitbox.gd" id="1_717iw"]
-[ext_resource type="Script" path="res://scenes/tile.gd" id="1_o7s5e"]
+[ext_resource type="Script" uid="uid://c07qsyt25g57y" path="res://scripts/hitbox.gd" id="1_717iw"]
+[ext_resource type="Script" uid="uid://cklgj872uqtr" path="res://scenes/tile.gd" id="1_o7s5e"]
 [ext_resource type="Texture2D" uid="uid://b5x8vr822pve2" path="res://assets/gdodjam25tiles.png" id="1_ujvch"]
-[ext_resource type="Script" path="res://scripts/healthcomponent.gd" id="3_tm5ti"]
-[ext_resource type="Script" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="4_g5buo"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="5_kxl3g"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector2/ShakerTypeSineWave2D.gd" id="6_3cofm"]
-[ext_resource type="Script" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="7_r3vgf"]
-[ext_resource type="Script" path="res://addons/shaker/data/Single/ShakerTypeBrownianShake1D.gd" id="8_4vnm6"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_okqby"]
+[ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="3_tm5ti"]
+[ext_resource type="Script" uid="uid://laanabe07mn" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="4_g5buo"]
+[ext_resource type="Script" uid="uid://dr2b4djf4yy6e" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="5_kxl3g"]
+[ext_resource type="Script" uid="uid://ci4nvldbwgyyc" path="res://addons/shaker/data/Vector2/ShakerTypeSineWave2D.gd" id="6_3cofm"]
+[ext_resource type="Script" uid="uid://dn5l5yysmxmn6" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="7_r3vgf"]
+[ext_resource type="Script" uid="uid://boxwngwghmra3" path="res://addons/shaker/data/Single/ShakerTypeBrownianShake1D.gd" id="8_4vnm6"]
+[ext_resource type="Script" uid="uid://cms1s1umu7r7x" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_okqby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ox66"]
 size = Vector2(8.00001, 8)
@@ -83,8 +83,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k3f81"]
 _data = {
-"RESET": SubResource("Animation_edhww"),
-"fall": SubResource("Animation_dtrbu")
+&"RESET": SubResource("Animation_edhww"),
+&"fall": SubResource("Animation_dtrbu")
 }
 
 [node name="tile" type="Node2D"]
@@ -123,7 +123,7 @@ shakerPreset = SubResource("Resource_akm5y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_k3f81")
+&"": SubResource("AnimationLibrary_k3f81")
 }
 
 [connection signal="dead" from="Tile/Health_Component" to="." method="_on_health_component_dead"]

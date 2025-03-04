@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://256aql77ixgf"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_3pj5x"]
+[ext_resource type="Script" uid="uid://cnwt1yux40e0w" path="res://scenes/enemies/enemy.gd" id="1_3pj5x"]
 [ext_resource type="Texture2D" uid="uid://cc73fyq7vqd6l" path="res://assets/gdodjam25enemies.png" id="1_6yfi7"]
-[ext_resource type="Script" path="res://scripts/hitbox.gd" id="2_5l3iw"]
-[ext_resource type="Script" path="res://scripts/healthcomponent.gd" id="3_4oc2j"]
+[ext_resource type="Script" uid="uid://c07qsyt25g57y" path="res://scripts/hitbox.gd" id="2_5l3iw"]
+[ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="3_4oc2j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l8v0g"]
 atlas = ExtResource("1_6yfi7")

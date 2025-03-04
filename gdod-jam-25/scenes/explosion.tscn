@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b0muqpw3k8j1r"]
 
 [ext_resource type="AudioStream" uid="uid://b0lnuyq0peu21" path="res://assets/sounds/Bluezone_BC0277_explosion_urban_004_02.wav" id="1_06lab"]
-[ext_resource type="Script" path="res://scenes/explosion.gd" id="1_l8tol"]
+[ext_resource type="Script" uid="uid://bgq8kkwj6u12y" path="res://scenes/explosion.gd" id="1_l8tol"]
 
 [sub_resource type="Animation" id="Animation_i8j82"]
 length = 0.001
@@ -131,8 +131,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5j50w"]
 _data = {
-"RESET": SubResource("Animation_i8j82"),
-"explode": SubResource("Animation_34ako")
+&"RESET": SubResource("Animation_i8j82"),
+&"explode": SubResource("Animation_34ako")
 }
 
 [sub_resource type="Gradient" id="Gradient_2qlga"]
@@ -172,7 +172,7 @@ script = ExtResource("1_l8tol")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5j50w")
+&"": SubResource("AnimationLibrary_5j50w")
 }
 
 [node name="shockwave" type="Polygon2D" parent="."]
@@ -190,10 +190,10 @@ bus = &"music"
 
 [node name="sparks" type="GPUParticles2D" parent="."]
 amount = 20
-process_material = SubResource("ParticleProcessMaterial_eirpm")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_eirpm")
 
 [node name="blast radius" type="Area2D" parent="."]
 collision_layer = 3
