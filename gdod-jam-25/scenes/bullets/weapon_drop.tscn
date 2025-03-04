@@ -46,6 +46,7 @@ weapon_drops = Array[ExtResource("2_khook")]([ExtResource("3_n4j5l"), ExtResourc
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 100
 lifetime = 2.0
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_pj4ps")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

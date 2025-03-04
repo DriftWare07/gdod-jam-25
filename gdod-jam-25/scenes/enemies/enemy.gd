@@ -48,6 +48,8 @@ func attack():
 	for body in bodies:
 		if body.is_in_group("player"):
 			body.damage(15)
+			$groan.play()
+			$slash.restart()
 			$attackTimer.start()
 
 func dead():

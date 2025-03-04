@@ -18,6 +18,7 @@ func _ready() -> void:
 	f.enabled = true
 	floors.append(f)
 	audio.reduce_reverb()
+	Global.can_control = true
 
 
 #keep track of charge level

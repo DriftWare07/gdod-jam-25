@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ddrfnmgjnyj4j"
+path="res://.godot/imported/CREAHmn_Test Subject 3 10_344 Audio_Zombie Specimens Vol 2.wav-7111e180cd803ca1472cd3087dce45f8.sample"
+
+[deps]
+
+source_file="res://assets/sounds/CREAHmn_Test Subject 3 10_344 Audio_Zombie Specimens Vol 2.wav"
+dest_files=["res://.godot/imported/CREAHmn_Test Subject 3 10_344 Audio_Zombie Specimens Vol 2.wav-7111e180cd803ca1472cd3087dce45f8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

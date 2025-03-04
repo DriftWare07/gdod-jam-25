@@ -8,6 +8,10 @@ var is_visible = true
 func _ready() -> void:
 	randomize()
 	rando()
+	position = Vector2(randi_range(-100,100),randi_range(-100,100))
+
+func _process(delta: float) -> void:
+	if visible: position += (Global.Player.global_position - global_position)*delta/10
 
 func appear():
 	rando()
@@ -25,4 +29,5 @@ func _on_body_entered(body: Node2D) -> void:
 		is_visible = false
 		$reloadsfx.play()
 		hide()
+		position = Vector2(randi_range(-100,100),randi_range(-100,100))
 		$Timer.start()

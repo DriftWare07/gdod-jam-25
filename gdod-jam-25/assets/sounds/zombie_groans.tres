@@ -1,0 +1,13 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://cmqxuo6khrelx"]
+
+[ext_resource type="AudioStream" uid="uid://cxb4tkbrn3n81" path="res://assets/sounds/CREAHmn_Test Subject 2  12_344 Audio_Zombie Specimens Vol 2.wav" id="1_7nekh"]
+[ext_resource type="AudioStream" uid="uid://ddrfnmgjnyj4j" path="res://assets/sounds/CREAHmn_Test Subject 3 10_344 Audio_Zombie Specimens Vol 2.wav" id="2_oppwd"]
+[ext_resource type="AudioStream" uid="uid://ce36oenmgiqhk" path="res://assets/sounds/CREAHmn_Test Subject 4 05_344 Audio_Zombie Specimens Vol 2.wav" id="3_6mmmp"]
+[ext_resource type="AudioStream" uid="uid://cdu6oeygv88q3" path="res://assets/sounds/CREAHmn_Test Subject 6 09_344 Audio_Zombie Specimens Vol 2.wav" id="4_ajqwl"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_7nekh")
+stream_1/stream = ExtResource("2_oppwd")
+stream_2/stream = ExtResource("3_6mmmp")
+stream_3/stream = ExtResource("4_ajqwl")

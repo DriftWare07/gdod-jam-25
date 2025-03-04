@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://256aql77ixgf"]
+[gd_scene load_steps=18 format=3 uid="uid://256aql77ixgf"]
 
 [ext_resource type="Script" uid="uid://cnwt1yux40e0w" path="res://scenes/enemies/enemy.gd" id="1_3pj5x"]
 [ext_resource type="Texture2D" uid="uid://cc73fyq7vqd6l" path="res://assets/gdodjam25enemies.png" id="1_6yfi7"]
 [ext_resource type="Script" uid="uid://c07qsyt25g57y" path="res://scripts/hitbox.gd" id="2_5l3iw"]
 [ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="3_4oc2j"]
+[ext_resource type="AudioStream" uid="uid://cmqxuo6khrelx" path="res://assets/sounds/zombie_groans.tres" id="5_pg837"]
+[ext_resource type="Texture2D" uid="uid://0higow8imbdb" path="res://assets/slash.png" id="6_pwrlg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l8v0g"]
 atlas = ExtResource("1_6yfi7")
@@ -34,7 +36,33 @@ radius = 8.0
 radius = 8.90608
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1sjg"]
-size = Vector2(6, 14)
+size = Vector2(8, 14)
+
+[sub_resource type="Curve" id="Curve_pwrlg"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(0.8, -10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pfcy5"]
+curve = SubResource("Curve_pwrlg")
+
+[sub_resource type="Gradient" id="Gradient_pfcy5"]
+offsets = PackedFloat32Array(0, 0.0747126, 0.408046, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7e2u1"]
+gradient = SubResource("Gradient_pfcy5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_leu6i"]
+particle_flag_disable_z = true
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 9.99998
+angular_velocity_curve = SubResource("CurveTexture_pfcy5")
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_7e2u1")
 
 [node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("hit_box")]
 z_index = 1
@@ -76,13 +104,29 @@ health = 3.0
 iframes = 0.0
 
 [node name="attackTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="attack" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
-position = Vector2(7, 0)
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_w1sjg")
+
+[node name="groan" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_pg837")
+max_polyphony = 10
+
+[node name="slash" type="GPUParticles2D" parent="."]
+z_index = 2
+position = Vector2(9, 0)
+emitting = false
+amount = 1
+texture = ExtResource("6_pwrlg")
+lifetime = 0.5
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_leu6i")
 
 [connection signal="dead" from="Health_Component" to="." method="dead"]
 [connection signal="timeout" from="attackTimer" to="." method="attack"]
