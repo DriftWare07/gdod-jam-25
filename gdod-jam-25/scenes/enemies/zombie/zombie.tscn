@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://256aql77ixgf"]
+[gd_scene load_steps=11 format=3 uid="uid://256aql77ixgf"]
 
 [ext_resource type="Script" uid="uid://cnwt1yux40e0w" path="res://scenes/enemies/enemy.gd" id="1_3pj5x"]
 [ext_resource type="Texture2D" uid="uid://cc73fyq7vqd6l" path="res://assets/gdodjam25enemies.png" id="1_6yfi7"]
@@ -33,12 +33,17 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_i7l4s"]
 radius = 8.90608
 
-[node name="Zombie" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1sjg"]
+size = Vector2(6, 14)
+
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("hit_box")]
+z_index = 1
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_3pj5x")
 speed = 50
 decel = 0.7
+hit_box = NodePath("attack")
 
 [node name="legs" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.2, 1.2)
@@ -70,4 +75,14 @@ max_health = 3.0
 health = 3.0
 iframes = 0.0
 
+[node name="attackTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="attack" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
+position = Vector2(7, 0)
+shape = SubResource("RectangleShape2D_w1sjg")
+
 [connection signal="dead" from="Health_Component" to="." method="dead"]
+[connection signal="timeout" from="attackTimer" to="." method="attack"]

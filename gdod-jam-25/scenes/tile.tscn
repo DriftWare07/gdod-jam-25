@@ -112,7 +112,6 @@ host = NodePath("../..")
 delete_host_on_death = false
 max_health = 3.0
 health = 3.0
-regenerate = true
 
 [node name="ShakerComponent2D" type="Node2D" parent="Tile"]
 script = ExtResource("4_g5buo")

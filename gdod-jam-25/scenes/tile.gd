@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	var bodies = $Tile.get_overlapping_bodies()
 	for body in bodies:
 		if body is player:
-			body.global_position = Vector2(128,128)
+			body.global_position = Vector2(0,0)
 	
 	var areas = $Tile.get_overlapping_areas()
 	for area in areas:
@@ -29,5 +29,6 @@ func _process(delta: float) -> void:
 
 
 func _on_health_component_dead() -> void:
+	if dead: return
 	$AnimationPlayer.play("fall")
 	dead = true

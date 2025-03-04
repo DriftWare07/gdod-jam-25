@@ -8,7 +8,7 @@ var reverb
 func _ready() -> void:
 	reverb = AudioServer.get_bus_effect(1,0)
 	
-	reduce_reverb()
+	
 
 func _process(delta: float) -> void:
 	reverb.room_size = room_size

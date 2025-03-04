@@ -1,0 +1,33 @@
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://cogh7dbqflian"]
+
+[ext_resource type="Texture2D" uid="uid://b5x8vr822pve2" path="res://assets/gdodjam25tiles.png" id="1_x1i2l"]
+[ext_resource type="PackedScene" uid="uid://256aql77ixgf" path="res://scenes/enemies/zombie/zombie.tscn" id="2_pnaot"]
+[ext_resource type="PackedScene" uid="uid://c2ysjggihyfw6" path="res://scenes/tile.tscn" id="3_u6fay"]
+[ext_resource type="PackedScene" uid="uid://bm7no1b2y58ow" path="res://scenes/spawnpath.tscn" id="4_pnaot"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jae4e"]
+texture = ExtResource("1_x1i2l")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_nx8mn"]
+resource_name = "enemies"
+scenes/1/scene = ExtResource("2_pnaot")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_bifwp"]
+resource_name = "tiles"
+scenes/1/scene = ExtResource("3_u6fay")
+scenes/2/scene = ExtResource("4_pnaot")
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_jae4e")
+sources/1 = SubResource("TileSetScenesCollectionSource_nx8mn")
+sources/2 = SubResource("TileSetScenesCollectionSource_bifwp")

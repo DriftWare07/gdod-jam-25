@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bxccx43ua8hgq"]
+[gd_scene load_steps=24 format=3 uid="uid://bxccx43ua8hgq"]
 
 [ext_resource type="Script" uid="uid://yu6sm83ng8ui" path="res://scenes/player/player.gd" id="1_1jfvs"]
 [ext_resource type="SpriteFrames" uid="uid://br5woktbyhfk2" path="res://scenes/player/playerframes.tres" id="1_miq4j"]
@@ -9,6 +9,8 @@
 [ext_resource type="SpriteFrames" uid="uid://cjje8uhj174is" path="res://scenes/player/gunframes.tres" id="5_leyk3"]
 [ext_resource type="Script" uid="uid://cms1s1umu7r7x" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="6_6w8ue"]
 [ext_resource type="Script" uid="uid://dhx5nuathkr8x" path="res://addons/shaker/data/Vector2/ShakerTypeAudioBus2D.gd" id="7_c1xko"]
+[ext_resource type="Shader" uid="uid://coxw240w1wlrl" path="res://assets/shaders/grit.gdshader" id="7_ugbui"]
+[ext_resource type="Texture2D" uid="uid://dqpu83khcexr1" path="res://assets/shaders/dawnbringer-32-1x.png" id="8_fcs02"]
 [ext_resource type="Theme" uid="uid://2bek0awd3xii" path="res://assets/main_theme.tres" id="10_owkt0"]
 [ext_resource type="Script" uid="uid://b7egv4sl2xmd6" path="res://scenes/player/hud.gd" id="11_pllkt"]
 [ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="12_2nf2k"]
@@ -16,6 +18,34 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwp0u"]
 radius = 7.07107
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcs02"]
+bg_color = Color(0.321569, 0.733333, 1, 1)
+skew = Vector2(0.5, 0)
+border_width_right = 10
+border_color = Color(0.988235, 0.937255, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fcs02"]
+noise_type = 2
+frequency = 0.1381
+fractal_type = 2
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_myrg7"]
+noise = SubResource("FastNoiseLite_fcs02")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fcs02"]
+shader = ExtResource("7_ugbui")
+shader_parameter/color_palette = ExtResource("8_fcs02")
+shader_parameter/use_color_reference = false
+shader_parameter/noise = SubResource("NoiseTexture2D_myrg7")
+shader_parameter/angle = 0.0
+shader_parameter/dist = 0.0
+shader_parameter/addititive_intensity = 0.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ckqc"]
 radius = 8.90608
@@ -96,6 +126,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("10_owkt0")
 script = ExtResource("11_pllkt")
 hp = NodePath("../../Health_Component")
@@ -136,7 +167,7 @@ layout_mode = 0
 offset_left = -26.0
 offset_top = -8.0
 offset_right = 323.0
-offset_bottom = 86.0
+offset_bottom = 131.0
 
 [node name="healthbar" type="ProgressBar" parent="CanvasLayer/Control/healthPanel"]
 layout_mode = 0
@@ -146,9 +177,29 @@ offset_right = 332.0
 offset_bottom = 77.0
 value = 50.0
 
+[node name="chargebar" type="ProgressBar" parent="CanvasLayer/Control/healthPanel"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 87.0
+offset_right = 302.0
+offset_bottom = 123.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_fcs02")
+value = 50.0
+
+[node name="compress" type="ColorRect" parent="CanvasLayer/Control"]
+visible = false
+material = SubResource("ShaderMaterial_fcs02")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
 script = ExtResource("12_2nf2k")
 host = NodePath("..")
+delete_host_on_death = false
 
 [node name="hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component") groups=["player"]]
 script = ExtResource("13_3k6dn")

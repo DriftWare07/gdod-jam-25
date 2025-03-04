@@ -30,6 +30,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	if not Global.can_control: return
+	
 	var input = Input.get_vector("left","right","up","down").normalized()
 	leg_sprite.speed_scale = velocity.length()/50
 	
@@ -48,7 +50,7 @@ func update_weapons():
 	if weapon == null: return
 	gunsprite.play(weapon.animation_name)
 	
-	if Input.is_action_pressed("shoot") and can_shoot:
+	if Input.is_action_pressed("shoot") and can_shoot and Global.can_control:
 		var i = weapon.bullet_instance.instantiate()
 		$body/muzzle.position = weapon.muzzle_locations.pick_random()
 		get_tree().root.add_child(i)
