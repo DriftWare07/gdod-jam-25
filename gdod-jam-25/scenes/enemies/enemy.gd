@@ -65,4 +65,10 @@ func dead():
 	Global.TileMapParent.elevator_charge += charge_amount
 	get_tree().root.call_deferred("add_child",e)
 	e.global_position = global_position
+	
+	var energy = load("res://scenes/energy.tscn")
+	var nrg = energy.instantiate()
+	get_tree().root.call_deferred("add_child",nrg)
+	nrg.global_position = global_position
+	
 	e.done.connect(queue_free)

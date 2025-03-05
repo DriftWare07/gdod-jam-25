@@ -27,7 +27,7 @@ func rando():
 	$AnimatedSprite2D.play(selected_weapon.animation_name)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is player and is_visible:
+	if body is player and is_visible and Global.can_control:
 		body.pickup_weapon(selected_weapon)
 		is_visible = false
 		$reloadsfx.play()

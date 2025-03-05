@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://iydvtn3swf30"]
+[gd_scene load_steps=9 format=4 uid="uid://iydvtn3swf30"]
 
 [ext_resource type="TileSet" uid="uid://cogh7dbqflian" path="res://assets/tiles.tres" id="1_2q6dc"]
 [ext_resource type="Script" uid="uid://conxd5j5ea270" path="res://scenes/level.gd" id="2_w7c3h"]
 [ext_resource type="AudioStream" uid="uid://bvym8oukeodn2" path="res://assets/sounds/611111__5ro4__bell-ding-3.wav" id="3_w8frs"]
+[ext_resource type="PackedScene" uid="uid://bxv2wq14mx3ta" path="res://scenes/bullets/weapon_drop.tscn" id="4_mx8sn"]
 
 [sub_resource type="Animation" id="Animation_w7c3h"]
 length = 0.001
@@ -167,5 +168,8 @@ libraries = {
 [node name="ding" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_w8frs")
 bus = &"sfx"
+
+[node name="WeaponDrop" parent="." instance=ExtResource("4_mx8sn")]
+z_index = 2
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
