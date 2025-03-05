@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bxccx43ua8hgq"]
+[gd_scene load_steps=37 format=3 uid="uid://bxccx43ua8hgq"]
 
 [ext_resource type="Script" uid="uid://yu6sm83ng8ui" path="res://scenes/player/player.gd" id="1_1jfvs"]
 [ext_resource type="SpriteFrames" uid="uid://br5woktbyhfk2" path="res://scenes/player/playerframes.tres" id="1_miq4j"]
@@ -15,11 +15,12 @@
 [ext_resource type="Script" uid="uid://b7egv4sl2xmd6" path="res://scenes/player/hud.gd" id="11_pllkt"]
 [ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="12_2nf2k"]
 [ext_resource type="Script" uid="uid://c07qsyt25g57y" path="res://scripts/hitbox.gd" id="13_3k6dn"]
+[ext_resource type="Texture2D" uid="uid://dcy0ab042i50b" path="res://assets/spawn.png" id="16_kvlxm"]
 [ext_resource type="Texture2D" uid="uid://cpmf0sv2kagpp" path="res://assets/blood.png" id="16_myrg7"]
 [ext_resource type="AudioStream" uid="uid://cr47dwg4mtpj6" path="res://assets/sounds/hurt_sound.tres" id="17_kvlxm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwp0u"]
-radius = 7.07107
+radius = 6.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcs02"]
 bg_color = Color(0.321569, 0.733333, 1, 1)
@@ -63,6 +64,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_myrg7"]
 resource_name = "deathScreen"
@@ -80,14 +93,30 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_uf5tr"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(4, 4),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uf5tr"]
 _data = {
 &"RESET": SubResource("Animation_kvlxm"),
-&"deathScreen": SubResource("Animation_myrg7")
+&"deathScreen": SubResource("Animation_myrg7"),
+&"fall": SubResource("Animation_uf5tr")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ckqc"]
-radius = 8.90608
+radius = 7.0
 
 [sub_resource type="Resource" id="Resource_6gcn8"]
 script = ExtResource("7_c1xko")
@@ -132,6 +161,26 @@ damping_max = 120.0
 scale_min = 0.1
 scale_curve = SubResource("CurveTexture_kvlxm")
 color = Color(1, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_uf5tr"]
+_data = [Vector2(0, 0.513007), 0.0, 0.0, 0, 0, Vector2(0.0534759, 1), 0.0, 0.0, 0, 0, Vector2(0.417112, 0), -3.11343, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uf5tr"]
+curve = SubResource("Curve_uf5tr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ydkj"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 45, 0)
+damping_min = 100.0
+damping_max = 120.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_uf5tr")
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_1jfvs")
@@ -360,7 +409,22 @@ stream = ExtResource("17_kvlxm")
 max_polyphony = 5
 bus = &"sfx"
 
+[node name="spawn" type="GPUParticles2D" parent="."]
+z_index = 2
+emitting = false
+amount = 100
+texture = ExtResource("16_kvlxm")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_8ydkj")
+
 [connection signal="timeout" from="firetimer" to="." method="_on_firetimer_timeout"]
 [connection signal="pressed" from="CanvasLayer/Control/gameover/restart" to="." method="_on_restart_pressed"]
+[connection signal="animation_finished" from="CanvasLayer/Control/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="damaged" from="Health_Component" to="hurtsound" method="play"]
 [connection signal="dead" from="Health_Component" to="." method="_on_health_component_dead"]

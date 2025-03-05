@@ -15,7 +15,7 @@ point_count = 6
 _data = [Vector2(0, 0.513007), 0.0, 0.0, 0, 0, Vector2(0.0534759, 1), 0.0, 0.0, 0, 0, Vector2(0.417112, 0), -3.11343, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_uf5tr"]
+[sub_resource type="CurveTexture" id="CurveTexture_vk5xr"]
 curve = SubResource("Curve_82dpr")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_duhab"]
@@ -29,7 +29,7 @@ gravity = Vector3(0, 45, 0)
 damping_min = 100.0
 damping_max = 120.0
 scale_min = 0.1
-scale_curve = SubResource("CurveTexture_uf5tr")
+scale_curve = SubResource("CurveTexture_vk5xr")
 
 [node name="spawnpath" type="Path2D"]
 curve = SubResource("Curve2D_2ekri")

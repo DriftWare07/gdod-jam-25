@@ -93,7 +93,21 @@ func _on_health_component_dead() -> void:
 	$CanvasLayer/Control/AnimationPlayer.play("deathScreen")
 	$hurtsound.volume_db = -60.0
 	
+func start_fall():
+	Global.can_control = false
+	$CanvasLayer/Control/AnimationPlayer.play("fall")
 
+func finish_fall():
+	global_position = Vector2.ZERO
+	$spawn.restart()
+	$CanvasLayer/Control/AnimationPlayer.play("RESET")
+	
+	Global.can_control = true
 
 func _on_restart_pressed() -> void:
 	if hp.is_dead: get_tree().reload_current_scene()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "fall":
+		finish_fall()

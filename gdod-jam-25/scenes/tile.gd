@@ -17,15 +17,14 @@ func _process(delta: float) -> void:
 	sprite.modulate = lerp(Color.GRAY, Color.WHITE, hp_ratio)
 	
 	if not dead: return
-	var bodies = $Tile.get_overlapping_bodies()
-	for body in bodies:
-		if body is player:
-			body.global_position = Vector2(0,0)
 	
 	var areas = $Tile.get_overlapping_areas()
 	for area in areas:
 		if area is hitbox:
 			if !area.is_in_group("player"): area.kill()
+			elif area.is_in_group("player"):
+				area.damage(15)
+				area.get_parent().start_fall()
 
 
 func _on_health_component_dead() -> void:

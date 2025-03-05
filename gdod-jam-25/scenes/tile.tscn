@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://cms1s1umu7r7x" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_okqby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ox66"]
-size = Vector2(8.00001, 8)
+size = Vector2(4, 4)
 
 [sub_resource type="Resource" id="Resource_e3equ"]
 script = ExtResource("6_3cofm")
@@ -103,7 +103,7 @@ region_enabled = true
 region_rect = Rect2(16, 0, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tile"]
-position = Vector2(-2.81445e-06, 2.21469e-06)
+position = Vector2(-9.31706e-10, 1.1418e-06)
 shape = SubResource("RectangleShape2D_3ox66")
 
 [node name="Health_Component" type="Node" parent="Tile" node_paths=PackedStringArray("host")]
