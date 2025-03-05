@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Enemy
+class_name Zombie
 
 
 @export var speed = 3000
@@ -40,17 +40,23 @@ func _physics_process(delta: float) -> void:
 	else: velocity = velocity.lerp(Vector2.ZERO, decel*delta)
 	
 	velocity = velocity.clamp(Vector2(-speed,-speed), Vector2(speed,speed))
-	
 	move_and_slide()
-
-func attack():
+	
+	if not can_shoot: return
 	var bodies = hit_box.get_overlapping_areas()
 	for body in bodies:
 		if body.is_in_group("player"):
-			body.damage(15)
+			body.damage(5)
 			$groan.play()
 			$slash.restart()
 			$attackTimer.start()
+			can_shoot = false
+	
+	
+	
+
+func attack():
+	can_shoot = true
 
 func dead():
 	var explosion = load("res://scenes/explosion.tscn")

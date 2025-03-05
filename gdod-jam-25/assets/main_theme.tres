@@ -1,13 +1,31 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://2bek0awd3xii"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://2bek0awd3xii"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bw67"]
+[ext_resource type="StyleBox" uid="uid://cg5gc7byg1wqj" path="res://assets/panelbox.tres" id="1_xgdp2"]
+
+[sub_resource type="SystemFont" id="SystemFont_xgdp2"]
+font_names = PackedStringArray("Kenney Future")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xgdp2"]
 bg_color = Color(0, 0, 0, 1)
 skew = Vector2(0.5, 0)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0.834614, 0.834614, 0.834614, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d80jv"]
+bg_color = Color(1, 1, 1, 1)
+skew = Vector2(0.5, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -39,7 +57,11 @@ corner_radius_bottom_left = 10
 font_names = PackedStringArray("Kenney Future")
 
 [resource]
-Panel/styles/panel = SubResource("StyleBoxFlat_8bw67")
+Button/fonts/font = SubResource("SystemFont_xgdp2")
+Button/styles/hover = SubResource("StyleBoxFlat_xgdp2")
+Button/styles/normal = ExtResource("1_xgdp2")
+Button/styles/pressed = SubResource("StyleBoxFlat_d80jv")
+Panel/styles/panel = ExtResource("1_xgdp2")
 ProgressBar/font_sizes/font_size = 32
 ProgressBar/fonts/font = SubResource("SystemFont_mwhbv")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_ddt15")

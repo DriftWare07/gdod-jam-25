@@ -60,6 +60,7 @@ func update_weapons():
 		var sstream = AudioStreamPlayer.new()
 		add_child(sstream)
 		sstream.stream = weapon.sound
+		sstream.volume_db = -10.0
 		sstream.bus = AudioServer.get_bus_name(2)
 		sstream.play()
 		sstream.finished.connect(sstream.queue_free)
@@ -79,3 +80,13 @@ func update_weapons():
 
 func _on_firetimer_timeout() -> void:
 	can_shoot = true
+
+
+func _on_health_component_dead() -> void:
+	Global.can_control = false
+	body_sprite.hide()
+	leg_sprite.hide()
+	gunsprite.hide()
+	$blood.restart()
+	$CanvasLayer/Control/AnimationPlayer.play("deathScreen")
+	

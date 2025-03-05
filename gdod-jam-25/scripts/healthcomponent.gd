@@ -19,7 +19,7 @@ signal dead
 @export var go_to_scene_on_death : PackedScene
 
 var invframes = 0
-
+var is_dead = false
 
 func _process(delta: float) -> void:
 	invframes -= delta
@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 		health += (max_health/50)*delta
 
 
-func damage(dmg):
+func damage(dmg,object=null):
 	if invframes > 0: return
 	
 	
@@ -38,8 +38,9 @@ func damage(dmg):
 	damaged.emit()
 	health_changed.emit()
 	
-	if  health < 1:
+	if  health < 1 and not is_dead:
 		if reload_scene_on_death: get_tree().reload_current_scene()
 		if go_to_scene_on_death != null: get_tree().change_scene_to_packed(go_to_scene_on_death)
 		if delete_host_on_death: host.queue_free()
+		is_dead = true
 		dead.emit()

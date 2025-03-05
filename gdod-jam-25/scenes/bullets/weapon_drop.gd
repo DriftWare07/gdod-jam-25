@@ -11,7 +11,8 @@ func _ready() -> void:
 	position = Vector2(randi_range(-100,100),randi_range(-100,100))
 
 func _process(delta: float) -> void:
-	if visible: position += (Global.Player.global_position - global_position)*delta/10
+	if visible and Global.can_control: position += (Global.Player.global_position - global_position)*delta/10
+	
 
 func appear():
 	rando()

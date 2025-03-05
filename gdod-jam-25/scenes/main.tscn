@@ -1,11 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://bfa5pv2mqfceh"]
+[gd_scene load_steps=21 format=3 uid="uid://bfa5pv2mqfceh"]
 
 [ext_resource type="Script" uid="uid://dy4rx0d5c6wjb" path="res://scenes/floormanager.gd" id="1_85g3d"]
 [ext_resource type="Texture2D" uid="uid://b5x8vr822pve2" path="res://assets/gdodjam25tiles.png" id="1_rq6ol"]
 [ext_resource type="PackedScene" uid="uid://bxccx43ua8hgq" path="res://scenes/player/player.tscn" id="2_i30qc"]
 [ext_resource type="PackedScene" uid="uid://bxv2wq14mx3ta" path="res://scenes/bullets/weapon_drop.tscn" id="3_6npgh"]
 [ext_resource type="Texture2D" uid="uid://cd0xwgqehrnjd" path="res://assets/square.png" id="3_o6xl0"]
+[ext_resource type="Shader" uid="uid://dmugj14btb4ti" path="res://assets/shaders/radial.gdshader" id="3_tipki"]
+[ext_resource type="AudioStream" uid="uid://d4ni4cgf0lpej" path="res://assets/sounds/659007__bigdino1995__chargeup.wav" id="4_choun"]
 [ext_resource type="AudioStream" uid="uid://b2gxsq5docajf" path="res://assets/sounds/elevator panic ideaz.mp3" id="4_nadpv"]
+[ext_resource type="Theme" uid="uid://2bek0awd3xii" path="res://assets/main_theme.tres" id="5_85g3d"]
 [ext_resource type="Script" uid="uid://cxo358s5fa227" path="res://scripts/effect_fader.gd" id="5_jkce5"]
 
 [sub_resource type="Environment" id="Environment_q4j4f"]
@@ -13,6 +16,17 @@ background_mode = 3
 glow_enabled = true
 glow_normalized = true
 glow_blend_mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85g3d"]
+shader = ExtResource("3_tipki")
+shader_parameter/primary_color = Color(0, 1, 1, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/unfilled_color = Color(1, 1, 0.2, 1)
+shader_parameter/value = 0.28
+shader_parameter/smooth_ = 0.005
+shader_parameter/width_in = 0.85
+shader_parameter/width_out = 0.95
+shader_parameter/border_width = 0.06
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
 size = Vector2(16, 17)
@@ -63,6 +77,17 @@ texture = ExtResource("1_rq6ol")
 region_enabled = true
 region_rect = Rect2(32, 0, 32, 41)
 
+[node name="loadBar" type="ColorRect" parent="level/elevator"]
+material = SubResource("ShaderMaterial_85g3d")
+offset_left = -12.0
+offset_top = -17.0
+offset_right = 12.0
+offset_bottom = 7.0
+
+[node name="chargefx" type="AudioStreamPlayer2D" parent="level/elevator"]
+stream = ExtResource("4_choun")
+bus = &"sfx"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="level"]
 shape = SubResource("RectangleShape2D_85g3d")
 
@@ -72,6 +97,7 @@ emitting = false
 amount = 5
 texture = ExtResource("3_o6xl0")
 lifetime = 3.5
+preprocess = 3.5
 process_material = SubResource("ParticleProcessMaterial_choun")
 
 [node name="upgrade_menu" type="CanvasLayer" parent="level"]
@@ -84,13 +110,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_85g3d")
 
 [node name="continueButton" type="Button" parent="level/upgrade_menu/Control"]
 layout_mode = 0
-offset_left = 560.0
+offset_left = 520.0
 offset_top = 520.0
-offset_right = 639.0
-offset_bottom = 551.0
+offset_right = 696.0
+offset_bottom = 568.0
 text = "Continue
 "
 
@@ -98,7 +125,7 @@ text = "Continue
 position = Vector2(0, -24)
 
 [node name="WeaponDrop" parent="." instance=ExtResource("3_6npgh")]
-position = Vector2(-56, -48)
+position = Vector2(-64, -56)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_nadpv")

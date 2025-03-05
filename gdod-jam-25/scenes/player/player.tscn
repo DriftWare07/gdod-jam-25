@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bxccx43ua8hgq"]
+[gd_scene load_steps=31 format=3 uid="uid://bxccx43ua8hgq"]
 
 [ext_resource type="Script" uid="uid://yu6sm83ng8ui" path="res://scenes/player/player.gd" id="1_1jfvs"]
 [ext_resource type="SpriteFrames" uid="uid://br5woktbyhfk2" path="res://scenes/player/playerframes.tres" id="1_miq4j"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://b7egv4sl2xmd6" path="res://scenes/player/hud.gd" id="11_pllkt"]
 [ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="12_2nf2k"]
 [ext_resource type="Script" uid="uid://c07qsyt25g57y" path="res://scripts/hitbox.gd" id="13_3k6dn"]
+[ext_resource type="Texture2D" uid="uid://cpmf0sv2kagpp" path="res://assets/blood.png" id="16_myrg7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwp0u"]
 radius = 7.07107
@@ -45,7 +46,44 @@ shader_parameter/use_color_reference = false
 shader_parameter/noise = SubResource("NoiseTexture2D_myrg7")
 shader_parameter/angle = 0.0
 shader_parameter/dist = 0.0
-shader_parameter/addititive_intensity = 0.2
+shader_parameter/addititive_intensity = 0.1
+
+[sub_resource type="Animation" id="Animation_myrg7"]
+resource_name = "deathScreen"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gameover:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kvlxm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gameover:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uf5tr"]
+_data = {
+&"RESET": SubResource("Animation_kvlxm"),
+&"deathScreen": SubResource("Animation_myrg7")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ckqc"]
 radius = 8.90608
@@ -73,8 +111,28 @@ ScaleShake = Array[ExtResource("3_t0gkm")]([])
 bake_internal = 64
 __follow_timeline = false
 
+[sub_resource type="Curve" id="Curve_kvlxm"]
+_data = [Vector2(0, 0.513007), 0.0, 0.0, 0, 0, Vector2(0.0534759, 1), 0.0, 0.0, 0, 0, Vector2(0.417112, 0), -3.11343, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uf5tr"]
+curve = SubResource("Curve_kvlxm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lgqa7"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 45, 0)
+damping_min = 100.0
+damping_max = 120.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_uf5tr")
+color = Color(1, 0, 0, 1)
+
 [node name="player" type="CharacterBody2D"]
-position = Vector2(0.0949757, 0.137363)
 script = ExtResource("1_1jfvs")
 speed = 1500
 accel = 1.3
@@ -186,8 +244,52 @@ offset_bottom = 123.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_fcs02")
 value = 50.0
 
+[node name="gameover" type="ColorRect" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.505882)
+
+[node name="gameOverTest" type="RichTextLabel" parent="CanvasLayer/Control/gameover"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.5
+offset_top = -108.0
+offset_right = 226.5
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="causeOfDeath" type="RichTextLabel" parent="CanvasLayer/Control/gameover"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = 34.0
+offset_right = 186.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "Died Of Death"
+horizontal_alignment = 1
+
 [node name="compress" type="ColorRect" parent="CanvasLayer/Control"]
-visible = false
 material = SubResource("ShaderMaterial_fcs02")
 layout_mode = 1
 anchors_preset = 15
@@ -195,6 +297,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_uf5tr")
+}
+autoplay = "RESET"
 
 [node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
 script = ExtResource("12_2nf2k")
@@ -217,4 +326,17 @@ Targets = [NodePath("../Camera2D")]
 AutoPlay = true
 shakerPreset = SubResource("Resource_6a8ul")
 
+[node name="blood" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+texture = ExtResource("16_myrg7")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_lgqa7")
+
 [connection signal="timeout" from="firetimer" to="." method="_on_firetimer_timeout"]
+[connection signal="dead" from="Health_Component" to="." method="_on_health_component_dead"]
