@@ -17,6 +17,8 @@ func _process(delta: float) -> void:
 func appear():
 	rando()
 	is_visible = true
+	$spawn.restart()
+	$spawnSound.play()
 	show()
 
 func rando():

@@ -1,24 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://bm7no1b2y58ow"]
+[gd_scene load_steps=9 format=3 uid="uid://bm7no1b2y58ow"]
 
 [ext_resource type="Script" uid="uid://d37gk7e47v580" path="res://scripts/spawnpath.gd" id="1_p700c"]
 [ext_resource type="PackedScene" uid="uid://256aql77ixgf" path="res://scenes/enemies/zombie/zombie.tscn" id="2_gsdyw"]
+[ext_resource type="AudioStream" uid="uid://k5rkfxcbrsst" path="res://assets/sounds/560124__steaq__a-teleportation.ogg" id="3_gsdyw"]
+[ext_resource type="Texture2D" uid="uid://dcy0ab042i50b" path="res://assets/spawn.png" id="4_vk5xr"]
 
 [sub_resource type="Curve2D" id="Curve2D_2ekri"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 32, 224, 0, 0, 0, 0, 224, 224, 0, 0, 0, 0, 224, 32, 0, 0, 0, 0, 32, 32, 0, 0, 0, 0, 32, 224)
+"points": PackedVector2Array(0, 0, 0, 0, 32, 240, 0, 0, 0, 0, 240, 240, 0, 0, 0, 0, 240, 32, 0, 0, 0, 0, 32, 32, 0, 0, 0, 0, 32, 224, 0, 0, 0, 0, 32, 240)
 }
-point_count = 5
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_82dpr"]
+_data = [Vector2(0, 0.513007), 0.0, 0.0, 0, 0, Vector2(0.0534759, 1), 0.0, 0.0, 0, 0, Vector2(0.417112, 0), -3.11343, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uf5tr"]
+curve = SubResource("Curve_82dpr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_duhab"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 45, 0)
+damping_min = 100.0
+damping_max = 120.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_uf5tr")
 
 [node name="spawnpath" type="Path2D"]
 curve = SubResource("Curve2D_2ekri")
 
 [node name="spawner" type="PathFollow2D" parent="."]
-position = Vector2(32, 224)
+position = Vector2(32, 240)
 script = ExtResource("1_p700c")
 enemies = Array[PackedScene]([ExtResource("2_gsdyw")])
 
 [node name="spawntimer" type="Timer" parent="spawner"]
 wait_time = 2.5
 autostart = true
+
+[node name="teleport" type="AudioStreamPlayer2D" parent="spawner"]
+stream = ExtResource("3_gsdyw")
+max_polyphony = 10
+bus = &"sfx"
+
+[node name="blood" type="GPUParticles2D" parent="spawner"]
+z_index = 2
+emitting = false
+amount = 100
+texture = ExtResource("4_vk5xr")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_duhab")
 
 [connection signal="timeout" from="spawner/spawntimer" to="spawner" method="spawn"]

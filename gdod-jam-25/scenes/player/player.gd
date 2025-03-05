@@ -12,6 +12,7 @@ class_name player
 @onready var gunsprite = $body/gunsprite
 @onready var firetimer = $firetimer
 @onready var bullet_sound = $bullet_sound
+@onready var hp = $Health_Component
 
 var can_shoot = true
 var ammo = 1
@@ -55,6 +56,7 @@ func update_weapons():
 		$body/muzzle.position = weapon.muzzle_locations.pick_random()
 		get_tree().root.add_child(i)
 		i.global_position = $body/muzzle.global_position
+		i.damage = weapon.damage
 		i.look_at(get_global_mouse_position())
 		
 		var sstream = AudioStreamPlayer.new()
@@ -89,4 +91,9 @@ func _on_health_component_dead() -> void:
 	gunsprite.hide()
 	$blood.restart()
 	$CanvasLayer/Control/AnimationPlayer.play("deathScreen")
+	$hurtsound.volume_db = -60.0
 	
+
+
+func _on_restart_pressed() -> void:
+	if hp.is_dead: get_tree().reload_current_scene()

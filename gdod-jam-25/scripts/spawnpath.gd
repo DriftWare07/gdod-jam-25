@@ -12,5 +12,7 @@ func spawn() -> void:
 	var e = enemies.pick_random().instantiate()
 	progress_ratio = randf_range(0,1)
 	
+	$blood.restart()
+	$teleport.play()
 	get_parent().add_child(e)
 	e.global_position = global_position

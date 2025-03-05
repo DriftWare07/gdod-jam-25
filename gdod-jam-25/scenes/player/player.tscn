@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bxccx43ua8hgq"]
+[gd_scene load_steps=32 format=3 uid="uid://bxccx43ua8hgq"]
 
 [ext_resource type="Script" uid="uid://yu6sm83ng8ui" path="res://scenes/player/player.gd" id="1_1jfvs"]
 [ext_resource type="SpriteFrames" uid="uid://br5woktbyhfk2" path="res://scenes/player/playerframes.tres" id="1_miq4j"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="12_2nf2k"]
 [ext_resource type="Script" uid="uid://c07qsyt25g57y" path="res://scripts/hitbox.gd" id="13_3k6dn"]
 [ext_resource type="Texture2D" uid="uid://cpmf0sv2kagpp" path="res://assets/blood.png" id="16_myrg7"]
+[ext_resource type="AudioStream" uid="uid://cr47dwg4mtpj6" path="res://assets/sounds/hurt_sound.tres" id="17_kvlxm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwp0u"]
 radius = 7.07107
@@ -48,6 +49,21 @@ shader_parameter/angle = 0.0
 shader_parameter/dist = 0.0
 shader_parameter/addititive_intensity = 0.1
 
+[sub_resource type="Animation" id="Animation_kvlxm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gameover:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_myrg7"]
 resource_name = "deathScreen"
 length = 3.0
@@ -62,21 +78,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_kvlxm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("gameover:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uf5tr"]
@@ -115,7 +116,7 @@ __follow_timeline = false
 _data = [Vector2(0, 0.513007), 0.0, 0.0, 0, 0, Vector2(0.0534759, 1), 0.0, 0.0, 0, 0, Vector2(0.417112, 0), -3.11343, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_uf5tr"]
+[sub_resource type="CurveTexture" id="CurveTexture_kvlxm"]
 curve = SubResource("Curve_kvlxm")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lgqa7"]
@@ -129,7 +130,7 @@ gravity = Vector3(0, 45, 0)
 damping_min = 100.0
 damping_max = 120.0
 scale_min = 0.1
-scale_curve = SubResource("CurveTexture_uf5tr")
+scale_curve = SubResource("CurveTexture_kvlxm")
 color = Color(1, 0, 0, 1)
 
 [node name="player" type="CharacterBody2D"]
@@ -252,6 +253,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(1, 0, 0, 0.505882)
 
 [node name="gameOverTest" type="RichTextLabel" parent="CanvasLayer/Control/gameover"]
@@ -288,6 +290,15 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 24
 text = "Died Of Death"
 horizontal_alignment = 1
+
+[node name="restart" type="Button" parent="CanvasLayer/Control/gameover"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 416.0
+offset_right = 699.0
+offset_bottom = 511.0
+theme_override_font_sizes/font_size = 32
+text = "Again!"
 
 [node name="compress" type="ColorRect" parent="CanvasLayer/Control"]
 material = SubResource("ShaderMaterial_fcs02")
@@ -338,5 +349,12 @@ fixed_fps = 60
 trail_lifetime = 1.0
 process_material = SubResource("ParticleProcessMaterial_lgqa7")
 
+[node name="hurtsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_kvlxm")
+max_polyphony = 5
+bus = &"sfx"
+
 [connection signal="timeout" from="firetimer" to="." method="_on_firetimer_timeout"]
+[connection signal="pressed" from="CanvasLayer/Control/gameover/restart" to="." method="_on_restart_pressed"]
+[connection signal="damaged" from="Health_Component" to="hurtsound" method="play"]
 [connection signal="dead" from="Health_Component" to="." method="_on_health_component_dead"]

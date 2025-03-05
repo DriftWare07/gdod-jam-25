@@ -1,0 +1,19 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://cr47dwg4mtpj6"]
+
+[ext_resource type="AudioStream" uid="uid://d06v6lbc4xj51" path="res://assets/sounds/hurt sounds/413173__micahlg__male_hurt12.ogg" id="1_q0hs8"]
+[ext_resource type="AudioStream" uid="uid://d0emc0p7td87g" path="res://assets/sounds/hurt sounds/413174__micahlg__male_hurt11.ogg" id="2_a22tu"]
+[ext_resource type="AudioStream" uid="uid://baqeioa70fwy2" path="res://assets/sounds/hurt sounds/413175__micahlg__male_hurt10.ogg" id="3_nogch"]
+[ext_resource type="AudioStream" uid="uid://3juerr0ytv41" path="res://assets/sounds/hurt sounds/413176__micahlg__male_hurt1.ogg" id="4_ind01"]
+[ext_resource type="AudioStream" uid="uid://cqec1w5e2mqsy" path="res://assets/sounds/hurt sounds/413177__micahlg__male_hurt3.ogg" id="5_k0x0q"]
+[ext_resource type="AudioStream" uid="uid://fiuphx63qfyh" path="res://assets/sounds/hurt sounds/413178__micahlg__male_hurt2.ogg" id="6_77yw0"]
+
+[resource]
+random_pitch = 1.1
+random_volume_offset_db = 0.4
+streams_count = 6
+stream_0/stream = ExtResource("1_q0hs8")
+stream_1/stream = ExtResource("2_a22tu")
+stream_2/stream = ExtResource("3_nogch")
+stream_3/stream = ExtResource("4_ind01")
+stream_4/stream = ExtResource("5_k0x0q")
+stream_5/stream = ExtResource("6_77yw0")

@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 
 func damage(dmg,object=null):
 	if invframes > 0: return
-	
+	if Global.can_control == false: return
 	
 	
 	invframes = iframes

@@ -8,6 +8,7 @@ var floors = []
 
 var current_floor = 0
 var elevator_charge = 0.0
+var charge_max = 100.0
 var timer = 0.0
 
 @onready var loadbar = $elevator/loadBar
@@ -27,11 +28,11 @@ func _ready() -> void:
 
 #keep track of charge level
 func _physics_process(delta: float) -> void:
-	if elevator_charge > 99:
-		loadbar.material.set_shader_parameter("value", 1.0-(timer/5.0))
+	if elevator_charge >= charge_max:
+		loadbar.material.set_shader_parameter("value", 1.0-(timer/3.0))
 	else:
-		loadbar.material.set_shader_parameter("value", elevator_charge/100)
-	timer = clamp(timer, 0.0, 5.0)
+		loadbar.material.set_shader_parameter("value", elevator_charge/charge_max)
+	timer = clamp(timer, 0.0, 3.0)
 	
 	if elevator_charge < 100: return
 	var bodies = get_overlapping_bodies()
@@ -42,7 +43,7 @@ func _physics_process(delta: float) -> void:
 	timer -= delta/2
 	
 	
-	if timer > 5.0:
+	if timer > 3.0:
 		timer = 0.0
 		end_level()
 
@@ -66,7 +67,7 @@ func next_level():
 		var f = floor_scene.instantiate()
 		add_child(f)
 		floors.append(f)
-	print(floors)
+	charge_max = 100+(current_floor*10)
 	#floors[current_floor].enabled = true
 	$elevatorEffect.emitting = false
 	
