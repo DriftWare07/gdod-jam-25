@@ -60,7 +60,7 @@ scale_curve = SubResource("CurveTexture_8n0ui")
 color_ramp = SubResource("GradientTexture1D_8n0ui")
 
 [node name="Robot" type="CharacterBody2D"]
-z_index = 1
+z_index = 2
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_8n0ui")

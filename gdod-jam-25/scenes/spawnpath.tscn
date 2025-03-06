@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bm7no1b2y58ow"]
+[gd_scene load_steps=10 format=3 uid="uid://bm7no1b2y58ow"]
 
 [ext_resource type="Script" uid="uid://d37gk7e47v580" path="res://scripts/spawnpath.gd" id="1_p700c"]
 [ext_resource type="PackedScene" uid="uid://256aql77ixgf" path="res://scenes/enemies/zombie/zombie.tscn" id="2_gsdyw"]
+[ext_resource type="PackedScene" uid="uid://bayqxdsifslln" path="res://scenes/enemies/robot/robot.tscn" id="3_82dpr"]
 [ext_resource type="AudioStream" uid="uid://k5rkfxcbrsst" path="res://assets/sounds/560124__steaq__a-teleportation.ogg" id="3_gsdyw"]
 [ext_resource type="Texture2D" uid="uid://dcy0ab042i50b" path="res://assets/spawn.png" id="4_vk5xr"]
 
@@ -37,7 +38,7 @@ curve = SubResource("Curve2D_2ekri")
 [node name="spawner" type="PathFollow2D" parent="."]
 position = Vector2(32, 240)
 script = ExtResource("1_p700c")
-enemies = Array[PackedScene]([ExtResource("2_gsdyw")])
+enemies = Array[PackedScene]([ExtResource("2_gsdyw"), ExtResource("3_82dpr")])
 
 [node name="spawntimer" type="Timer" parent="spawner"]
 wait_time = 2.5

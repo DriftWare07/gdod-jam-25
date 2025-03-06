@@ -57,6 +57,7 @@ func end_level():
 	$elevatorEffect.emitting = true
 	audio.increase_reverb()
 	$upgrade_menu.show()
+	next_level()
 
 #move to previous floor when player steps on fallen tile
 func next_level():
