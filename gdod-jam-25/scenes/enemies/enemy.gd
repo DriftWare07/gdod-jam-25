@@ -6,7 +6,7 @@ class_name Zombie
 @export var accel = 0.7
 @export var decel = 1.3
 
-
+@export var score = 100
 
 @onready var body_sprite = $body
 @onready var leg_sprite = $legs
@@ -59,6 +59,7 @@ func attack():
 	can_shoot = true
 
 func dead():
+	Global.current_score += score
 	var explosion = load("res://scenes/explosion.tscn")
 	var e = explosion.instantiate()
 	
