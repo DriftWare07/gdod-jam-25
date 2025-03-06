@@ -5,3 +5,6 @@ var Player : player
 var TileMapParent : Area2D
 
 var can_control = false
+
+var high_score = 0
+var current_score: int
