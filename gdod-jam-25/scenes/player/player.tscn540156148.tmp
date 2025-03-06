@@ -1,0 +1,438 @@
+[gd_scene load_steps=37 format=3 uid="uid://bxccx43ua8hgq"]
+
+[ext_resource type="Script" uid="uid://yu6sm83ng8ui" path="res://scenes/player/player.gd" id="1_1jfvs"]
+[ext_resource type="SpriteFrames" uid="uid://br5woktbyhfk2" path="res://scenes/player/playerframes.tres" id="1_miq4j"]
+[ext_resource type="Script" uid="uid://laanabe07mn" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="2_cw312"]
+[ext_resource type="Texture2D" uid="uid://b5x8vr822pve2" path="res://assets/gdodjam25tiles.png" id="2_ybbbr"]
+[ext_resource type="Script" uid="uid://dr2b4djf4yy6e" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="3_t0gkm"]
+[ext_resource type="Script" uid="uid://dn5l5yysmxmn6" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="4_kvuxx"]
+[ext_resource type="SpriteFrames" uid="uid://cjje8uhj174is" path="res://scenes/player/gunframes.tres" id="5_leyk3"]
+[ext_resource type="Script" uid="uid://cms1s1umu7r7x" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="6_6w8ue"]
+[ext_resource type="Script" uid="uid://dhx5nuathkr8x" path="res://addons/shaker/data/Vector2/ShakerTypeAudioBus2D.gd" id="7_c1xko"]
+[ext_resource type="Shader" uid="uid://coxw240w1wlrl" path="res://assets/shaders/grit.gdshader" id="7_ugbui"]
+[ext_resource type="Texture2D" uid="uid://dqpu83khcexr1" path="res://assets/shaders/dawnbringer-32-1x.png" id="8_fcs02"]
+[ext_resource type="Theme" uid="uid://2bek0awd3xii" path="res://assets/main_theme.tres" id="10_owkt0"]
+[ext_resource type="Script" uid="uid://b7egv4sl2xmd6" path="res://scenes/player/hud.gd" id="11_pllkt"]
+[ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="12_2nf2k"]
+[ext_resource type="Script" uid="uid://c07qsyt25g57y" path="res://scripts/hitbox.gd" id="13_3k6dn"]
+[ext_resource type="Texture2D" uid="uid://dcy0ab042i50b" path="res://assets/spawn.png" id="16_kvlxm"]
+[ext_resource type="Texture2D" uid="uid://cpmf0sv2kagpp" path="res://assets/blood.png" id="16_myrg7"]
+[ext_resource type="AudioStream" uid="uid://cr47dwg4mtpj6" path="res://assets/sounds/hurt_sound.tres" id="17_kvlxm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwp0u"]
+radius = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcs02"]
+bg_color = Color(0.321569, 0.733333, 1, 1)
+skew = Vector2(0.5, 0)
+border_width_right = 10
+border_color = Color(0.988235, 0.937255, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fcs02"]
+noise_type = 2
+frequency = 0.1381
+fractal_type = 2
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_myrg7"]
+noise = SubResource("FastNoiseLite_fcs02")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fcs02"]
+shader = ExtResource("7_ugbui")
+shader_parameter/color_palette = ExtResource("8_fcs02")
+shader_parameter/use_color_reference = false
+shader_parameter/noise = SubResource("NoiseTexture2D_myrg7")
+shader_parameter/angle = 0.0
+shader_parameter/dist = 0.0
+shader_parameter/addititive_intensity = 0.1
+
+[sub_resource type="Animation" id="Animation_kvlxm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gameover:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_myrg7"]
+resource_name = "deathScreen"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gameover:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uf5tr"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(4, 4),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uf5tr"]
+_data = {
+&"RESET": SubResource("Animation_kvlxm"),
+&"deathScreen": SubResource("Animation_myrg7"),
+&"fall": SubResource("Animation_uf5tr")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ckqc"]
+radius = 7.0
+
+[sub_resource type="Resource" id="Resource_6gcn8"]
+script = ExtResource("7_c1xko")
+bus_name = "sfx"
+min_frequence = Vector2(20, 20)
+max_frequence = Vector2(20000, 20000)
+amplitude = Vector2(10, 10)
+offset = Vector2(0, 0)
+BlendingMode = 0
+fade_in = -4.0
+fade_out = 0.0
+start_percent = 0.3
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Resource" id="Resource_6a8ul"]
+script = ExtResource("6_6w8ue")
+PositionShake = Array[ExtResource("3_t0gkm")]([SubResource("Resource_6gcn8")])
+RotationShake = Array[ExtResource("4_kvuxx")]([])
+ScaleShake = Array[ExtResource("3_t0gkm")]([])
+bake_internal = 64
+__follow_timeline = false
+
+[sub_resource type="Curve" id="Curve_kvlxm"]
+_data = [Vector2(0, 0.513007), 0.0, 0.0, 0, 0, Vector2(0.0534759, 1), 0.0, 0.0, 0, 0, Vector2(0.417112, 0), -3.11343, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_kvlxm"]
+curve = SubResource("Curve_kvlxm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lgqa7"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 45, 0)
+damping_min = 100.0
+damping_max = 120.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_kvlxm")
+color = Color(1, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_uf5tr"]
+_data = [Vector2(0, 0.513007), 0.0, 0.0, 0, 0, Vector2(0.0534759, 1), 0.0, 0.0, 0, 0, Vector2(0.417112, 0), -3.11343, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uf5tr"]
+curve = SubResource("Curve_uf5tr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ydkj"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 45, 0)
+damping_min = 100.0
+damping_max = 120.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_uf5tr")
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_1jfvs")
+speed = 50
+accel = 4.0
+decel = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dwp0u")
+
+[node name="legs" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+sprite_frames = ExtResource("1_miq4j")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.110374
+
+[node name="body" type="Sprite2D" parent="."]
+texture = ExtResource("2_ybbbr")
+region_enabled = true
+region_rect = Rect2(64, 0, 16, 16)
+
+[node name="gunsprite" type="AnimatedSprite2D" parent="body"]
+position = Vector2(24, 8.5)
+sprite_frames = ExtResource("5_leyk3")
+animation = &"rifle"
+autoplay = "default"
+
+[node name="muzzle" type="Node2D" parent="body"]
+position = Vector2(11.905, 5.86264)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-0.150734, -0.0705515)
+zoom = Vector2(4, 4)
+rotation_smoothing_enabled = true
+
+[node name="firetimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="bullet_sound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(8.90502, 4.86264)
+max_polyphony = 10
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("hp")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("10_owkt0")
+script = ExtResource("11_pllkt")
+hp = NodePath("../../Health_Component")
+
+[node name="weaponPanel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -294.0
+offset_top = -122.0
+offset_right = 41.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="gun" type="RichTextLabel" parent="CanvasLayer/Control/weaponPanel"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 7.0
+offset_right = 290.0
+offset_bottom = 47.0
+text = "Dual Pistols"
+
+[node name="ammo" type="RichTextLabel" parent="CanvasLayer/Control/weaponPanel"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 49.0
+offset_right = 256.0
+offset_bottom = 105.0
+theme_override_font_sizes/normal_font_size = 48
+text = "17/17"
+
+[node name="healthPanel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -8.0
+offset_right = 323.0
+offset_bottom = 131.0
+
+[node name="healthbar" type="ProgressBar" parent="CanvasLayer/Control/healthPanel"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 15.0
+offset_right = 332.0
+offset_bottom = 77.0
+value = 50.0
+
+[node name="chargebar" type="ProgressBar" parent="CanvasLayer/Control/healthPanel"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 87.0
+offset_right = 302.0
+offset_bottom = 123.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_fcs02")
+value = 50.0
+
+[node name="score" type="RichTextLabel" parent="CanvasLayer/Control/healthPanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 144.0
+offset_right = 311.0
+offset_bottom = 213.0
+text = "Score:"
+
+[node name="gameover" type="ColorRect" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 0.505882)
+
+[node name="gameOverTest" type="RichTextLabel" parent="CanvasLayer/Control/gameover"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.5
+offset_top = -108.0
+offset_right = 226.5
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="causeOfDeath" type="RichTextLabel" parent="CanvasLayer/Control/gameover"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = 34.0
+offset_right = 186.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "Died Of Death"
+horizontal_alignment = 1
+
+[node name="restart" type="Button" parent="CanvasLayer/Control/gameover"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.486
+anchor_top = 0.715
+anchor_right = 0.486
+anchor_bottom = 0.715
+offset_left = -139.872
+offset_top = -47.32
+offset_right = 139.128
+offset_bottom = 47.68
+theme_override_font_sizes/font_size = 32
+text = "Again!"
+metadata/_edit_use_anchors_ = true
+
+[node name="compress" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_fcs02")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_uf5tr")
+}
+autoplay = "RESET"
+
+[node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
+script = ExtResource("12_2nf2k")
+host = NodePath("..")
+delete_host_on_death = false
+
+[node name="hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component") groups=["player"]]
+script = ExtResource("13_3k6dn")
+health_component = NodePath("../Health_Component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_4ckqc")
+debug_color = Color(0.739454, 0, 0.0252916, 0.42)
+
+[node name="ShakerComponent2D" type="Node2D" parent="." node_paths=PackedStringArray("Targets")]
+position = Vector2(-0.150734, -0.0705515)
+script = ExtResource("2_cw312")
+custom_target = true
+Targets = [NodePath("../Camera2D")]
+AutoPlay = true
+shakerPreset = SubResource("Resource_6a8ul")
+
+[node name="blood" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+texture = ExtResource("16_myrg7")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_lgqa7")
+
+[node name="hurtsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_kvlxm")
+max_polyphony = 5
+bus = &"sfx"
+
+[node name="spawn" type="GPUParticles2D" parent="."]
+z_index = 2
+emitting = false
+amount = 100
+texture = ExtResource("16_kvlxm")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_8ydkj")
+
+[connection signal="timeout" from="firetimer" to="." method="_on_firetimer_timeout"]
+[connection signal="pressed" from="CanvasLayer/Control/gameover/restart" to="." method="_on_restart_pressed"]
+[connection signal="animation_finished" from="CanvasLayer/Control/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="damaged" from="Health_Component" to="hurtsound" method="play"]
+[connection signal="dead" from="Health_Component" to="." method="_on_health_component_dead"]
