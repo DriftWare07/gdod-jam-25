@@ -1,0 +1,119 @@
+[gd_scene load_steps=16 format=3 uid="uid://bayqxdsifslln"]
+
+[ext_resource type="Script" uid="uid://bqoc5tj8ur6n2" path="res://scenes/enemies/robot/robot.gd" id="1_8n0ui"]
+[ext_resource type="Texture2D" uid="uid://cc73fyq7vqd6l" path="res://assets/gdodjam25enemies.png" id="2_34nfv"]
+[ext_resource type="Script" uid="uid://c07qsyt25g57y" path="res://scripts/hitbox.gd" id="3_v6iui"]
+[ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="4_yc5vq"]
+[ext_resource type="AudioStream" uid="uid://cmqxuo6khrelx" path="res://assets/sounds/zombie_groans.tres" id="5_gdyw4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n0ui"]
+atlas = ExtResource("2_34nfv")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbb36"]
+atlas = ExtResource("2_34nfv")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_grxqq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8n0ui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbb36")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwirq"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i7l4s"]
+radius = 8.90608
+
+[sub_resource type="Gradient" id="Gradient_b4kre"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8n0ui"]
+gradient = SubResource("Gradient_b4kre")
+
+[sub_resource type="Curve" id="Curve_b4kre"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.457875, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8n0ui"]
+curve = SubResource("Curve_b4kre")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dbb36"]
+particle_flag_disable_z = true
+spread = 20.0
+initial_velocity_min = 25.0
+initial_velocity_max = 45.0
+gravity = Vector3(0, 0, 0)
+damping_min = 25.0
+damping_max = 80.0
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_8n0ui")
+color_ramp = SubResource("GradientTexture1D_8n0ui")
+
+[node name="Robot" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_8n0ui")
+speed = 45
+decel = 0.7
+
+[node name="legs" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_grxqq")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="body" type="Sprite2D" parent="."]
+texture = ExtResource("2_34nfv")
+region_enabled = true
+region_rect = Rect2(16, 0, 15, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vwirq")
+
+[node name="hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component") groups=["enemy"]]
+script = ExtResource("3_v6iui")
+health_component = NodePath("../Health_Component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_i7l4s")
+debug_color = Color(0.739454, 0, 0.0252916, 0.42)
+
+[node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
+script = ExtResource("4_yc5vq")
+host = NodePath("..")
+delete_host_on_death = false
+max_health = 2.0
+health = 2.0
+iframes = 0.0
+
+[node name="attackTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="groan" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_gdyw4")
+max_polyphony = 10
+
+[node name="blast" type="GPUParticles2D" parent="."]
+z_index = 2
+position = Vector2(1, 0)
+emitting = false
+amount = 25
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dbb36")
+
+[connection signal="dead" from="Health_Component" to="." method="dead"]
+[connection signal="timeout" from="attackTimer" to="." method="attack"]

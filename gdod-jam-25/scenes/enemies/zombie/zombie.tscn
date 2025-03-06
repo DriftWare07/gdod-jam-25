@@ -87,7 +87,7 @@ region_rect = Rect2(0, 0, 16, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vwirq")
 
-[node name="hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+[node name="hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component") groups=["enemy"]]
 script = ExtResource("2_5l3iw")
 health_component = NodePath("../Health_Component")
 
@@ -107,7 +107,7 @@ iframes = 0.0
 wait_time = 2.0
 autostart = true
 
-[node name="attack" type="Area2D" parent="."]
+[node name="attack" type="Area2D" parent="." groups=["enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
 position = Vector2(8, 0)

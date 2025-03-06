@@ -29,6 +29,10 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
 
+[global_group]
+
+enemy=""
+
 [input]
 
 up={
