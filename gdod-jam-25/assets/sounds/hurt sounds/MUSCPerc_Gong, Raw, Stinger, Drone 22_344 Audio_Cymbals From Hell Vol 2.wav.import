@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b0wwvfswbwjq4"
+path="res://.godot/imported/MUSCPerc_Gong, Raw, Stinger, Drone 22_344 Audio_Cymbals From Hell Vol 2.wav-d55f9a48db3b2ba3edc1beb08ca3de7d.sample"
+
+[deps]
+
+source_file="res://assets/sounds/hurt sounds/MUSCPerc_Gong, Raw, Stinger, Drone 22_344 Audio_Cymbals From Hell Vol 2.wav"
+dest_files=["res://.godot/imported/MUSCPerc_Gong, Raw, Stinger, Drone 22_344 Audio_Cymbals From Hell Vol 2.wav-d55f9a48db3b2ba3edc1beb08ca3de7d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

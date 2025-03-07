@@ -351,9 +351,9 @@ horizontal_alignment = 1
 [node name="restart" type="Button" parent="CanvasLayer/Control/gameover"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.486
+anchor_left = 0.357528
 anchor_top = 0.715
-anchor_right = 0.486
+anchor_right = 0.357528
 anchor_bottom = 0.715
 offset_left = -139.872
 offset_top = -47.32
@@ -361,6 +361,22 @@ offset_right = 139.128
 offset_bottom = 47.68
 theme_override_font_sizes/font_size = 32
 text = "Again!"
+metadata/_edit_use_anchors_ = true
+
+[node name="toMenu" type="Button" parent="CanvasLayer/Control/gameover"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.611
+anchor_top = 0.715
+anchor_right = 0.611
+anchor_bottom = 0.715
+offset_left = -139.872
+offset_top = -47.32
+offset_right = 139.128
+offset_bottom = 47.68
+theme_override_font_sizes/font_size = 32
+text = "Nah...
+"
 metadata/_edit_use_anchors_ = true
 
 [node name="compress" type="ColorRect" parent="CanvasLayer/Control"]
@@ -433,6 +449,7 @@ process_material = SubResource("ParticleProcessMaterial_8ydkj")
 
 [connection signal="timeout" from="firetimer" to="." method="_on_firetimer_timeout"]
 [connection signal="pressed" from="CanvasLayer/Control/gameover/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/gameover/toMenu" to="." method="_on_to_menu_pressed"]
 [connection signal="animation_finished" from="CanvasLayer/Control/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="damaged" from="Health_Component" to="hurtsound" method="play"]
 [connection signal="dead" from="Health_Component" to="." method="_on_health_component_dead"]

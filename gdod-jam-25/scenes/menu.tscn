@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqg8koeuspqkc"]
+
+[ext_resource type="Theme" uid="uid://2bek0awd3xii" path="res://assets/main_theme.tres" id="1_vjb58"]
+[ext_resource type="Texture2D" uid="uid://cvih0dgaufff6" path="res://assets/P1140690.png" id="1_yqeox"]
+[ext_resource type="Script" uid="uid://s68dshxmqcdh" path="res://scripts/main_menu.gd" id="2_mhnvy"]
+[ext_resource type="AudioStream" uid="uid://b0wwvfswbwjq4" path="res://assets/sounds/hurt sounds/MUSCPerc_Gong, Raw, Stinger, Drone 22_344 Audio_Cymbals From Hell Vol 2.wav" id="3_con2f"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vjb58")
+script = ExtResource("2_mhnvy")
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+modulate = Color(0.513233, 0.513233, 0.513233, 1)
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 13.3333
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_yqeox")
+expand_mode = 2
+
+[node name="Camera2D" type="Camera2D" parent="Control"]
+anchor_mode = 0
+
+[node name="buttons" type="Control" parent="Control"]
+layout_mode = 1
+anchor_left = 0.06
+anchor_top = 0.616
+anchor_right = 0.209
+anchor_bottom = 0.931
+offset_left = -0.120003
+offset_top = -0.16803
+offset_right = 0.231995
+offset_bottom = -0.288025
+grow_vertical = 0
+
+[node name="start" type="Button" parent="Control/buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 172.0
+offset_bottom = 64.0
+text = "Play"
+
+[node name="credits" type="Button" parent="Control/buttons"]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+offset_left = -31.0
+offset_top = 70.0
+offset_right = 141.0
+offset_bottom = 118.0
+text = "Credits"
+
+[node name="quit" type="Button" parent="Control/buttons"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+offset_left = -53.0
+offset_top = 125.0
+offset_right = 119.0
+offset_bottom = 157.0
+text = "Quit
+"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.431
+anchor_top = 0.364
+anchor_right = 0.878
+anchor_bottom = 0.599
+offset_left = -0.512024
+offset_top = 0.127991
+offset_right = -0.456055
+offset_bottom = -0.152039
+theme_override_font_sizes/normal_font_size = 48
+text = "Elevator Panic"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="credits" type="Panel" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 254.0
+offset_top = 397.0
+offset_right = 645.0
+offset_bottom = 558.0
+
+[node name="credittext" type="RichTextLabel" parent="Control/credits"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.075
+anchor_right = 0.125
+anchor_bottom = 0.075
+offset_left = 0.125
+offset_top = -0.0750008
+offset_right = 288.125
+offset_bottom = 135.925
+theme_override_font_sizes/normal_font_size = 16
+text = "A computer game by Alex
+Programming: Alex and Inaya
+Music by: Greyson
+SFX by: freesound and soniss
+"
+
+[node name="menu theme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_con2f")
+autoplay = true
+
+[connection signal="pressed" from="Control/buttons/start" to="Control" method="_on_start_pressed"]
+[connection signal="pressed" from="Control/buttons/credits" to="Control" method="_on_credits_pressed"]
+[connection signal="pressed" from="Control/buttons/quit" to="Control" method="_on_quit_pressed"]

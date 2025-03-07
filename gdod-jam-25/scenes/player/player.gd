@@ -111,3 +111,7 @@ func _on_restart_pressed() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fall":
 		finish_fall()
+
+
+func _on_to_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
