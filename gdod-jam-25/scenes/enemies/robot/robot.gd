@@ -17,9 +17,9 @@ func _physics_process(delta: float) -> void:
 	if !Global.Player: return
 	var input = Vector2.ZERO
 	
-	if global_position.distance_to(Global.Player.global_position) > 128:
+	if global_position.distance_to(Global.Player.global_position) > 96:
 		input = Vector2(sign(Global.Player.global_position.x-global_position.x),sign(Global.Player.global_position.y-global_position.y))
-	elif global_position.distance_to(Global.Player.global_position) < 96:
+	elif global_position.distance_to(Global.Player.global_position) < 64:
 		input = -Vector2(sign(Global.Player.global_position.x-global_position.x),sign(Global.Player.global_position.y-global_position.y))
 	
 	

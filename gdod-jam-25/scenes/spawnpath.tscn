@@ -38,7 +38,7 @@ curve = SubResource("Curve2D_2ekri")
 [node name="spawner" type="PathFollow2D" parent="."]
 position = Vector2(32, 240)
 script = ExtResource("1_p700c")
-enemies = Array[PackedScene]([ExtResource("2_gsdyw"), ExtResource("3_82dpr")])
+enemies = Array[PackedScene]([ExtResource("2_gsdyw"), ExtResource("2_gsdyw"), ExtResource("3_82dpr")])
 
 [node name="spawntimer" type="Timer" parent="spawner"]
 wait_time = 2.5

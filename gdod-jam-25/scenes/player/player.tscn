@@ -216,6 +216,10 @@ position = Vector2(11.905, 5.86264)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-0.150734, -0.0705515)
 zoom = Vector2(4, 4)
+limit_left = -256
+limit_top = -256
+limit_right = 256
+limit_bottom = 256
 rotation_smoothing_enabled = true
 
 [node name="firetimer" type="Timer" parent="."]

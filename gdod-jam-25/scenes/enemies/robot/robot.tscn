@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bayqxdsifslln"]
+[gd_scene load_steps=17 format=3 uid="uid://bayqxdsifslln"]
 
 [ext_resource type="Script" uid="uid://bqoc5tj8ur6n2" path="res://scenes/enemies/robot/robot.gd" id="1_8n0ui"]
 [ext_resource type="Texture2D" uid="uid://cc73fyq7vqd6l" path="res://assets/gdodjam25enemies.png" id="2_34nfv"]
 [ext_resource type="Script" uid="uid://c07qsyt25g57y" path="res://scripts/hitbox.gd" id="3_v6iui"]
 [ext_resource type="Script" uid="uid://cop8kdjtvd461" path="res://scripts/healthcomponent.gd" id="4_yc5vq"]
 [ext_resource type="AudioStream" uid="uid://cmqxuo6khrelx" path="res://assets/sounds/zombie_groans.tres" id="5_gdyw4"]
+[ext_resource type="AudioStream" uid="uid://22yu2h8rwgh3" path="res://assets/sounds/GUNMech_Heavy Mech Cock 03_DDUMAIS_NONE.wav" id="6_8n0ui"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8n0ui"]
 atlas = ExtResource("2_34nfv")
@@ -115,5 +116,10 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_dbb36")
 
+[node name="telegraph" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_8n0ui")
+bus = &"sfx"
+
 [connection signal="dead" from="Health_Component" to="." method="dead"]
-[connection signal="timeout" from="attackTimer" to="." method="attack"]
+[connection signal="timeout" from="attackTimer" to="telegraph" method="play"]
+[connection signal="finished" from="telegraph" to="." method="attack"]

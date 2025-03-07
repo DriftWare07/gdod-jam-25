@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cd0xwgqehrnjd" path="res://assets/square.png" id="3_o6xl0"]
 [ext_resource type="Shader" uid="uid://dmugj14btb4ti" path="res://assets/shaders/radial.gdshader" id="3_tipki"]
 [ext_resource type="AudioStream" uid="uid://d4ni4cgf0lpej" path="res://assets/sounds/659007__bigdino1995__chargeup.wav" id="4_choun"]
-[ext_resource type="AudioStream" uid="uid://b2gxsq5docajf" path="res://assets/sounds/elevator panic ideaz.mp3" id="4_nadpv"]
 [ext_resource type="Theme" uid="uid://2bek0awd3xii" path="res://assets/main_theme.tres" id="5_85g3d"]
 [ext_resource type="Script" uid="uid://cxo358s5fa227" path="res://scripts/effect_fader.gd" id="5_jkce5"]
+[ext_resource type="AudioStream" uid="uid://bvkhdij36xseu" path="res://assets/sounds/elevator panic 80_ doneeee.mp3" id="8_85g3d"]
 
 [sub_resource type="Environment" id="Environment_q4j4f"]
 background_mode = 3
@@ -115,7 +115,7 @@ theme = ExtResource("5_85g3d")
 position = Vector2(0, -5)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_nadpv")
+stream = ExtResource("8_85g3d")
 volume_db = -10.0
 autoplay = true
 bus = &"music"
