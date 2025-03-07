@@ -17,6 +17,7 @@ fire_delay = 0.25
 damage = 1
 max_ammo = 34
 spread = 1.0
+bullets = 1
 muzzle_locations = Array[Vector2]([Vector2(9, 4.5), Vector2(6, -4.5)])
 bullet_instance = ExtResource("1_qvcro")
 sound = SubResource("AudioStreamRandomizer_tlpwv")
