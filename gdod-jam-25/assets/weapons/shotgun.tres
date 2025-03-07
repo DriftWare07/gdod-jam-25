@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dgf6oxn4mdcmh"]
+
+[ext_resource type="PackedScene" uid="uid://d21qnpvmbxd6m" path="res://scenes/bullets/pistol_bullet.tscn" id="1_20uk7"]
+[ext_resource type="Script" uid="uid://bbo57s7n26tp1" path="res://scripts/weapon.gd" id="1_wvohp"]
+[ext_resource type="AudioStream" uid="uid://claiwyb0kmcr8" path="res://assets/shaders/Impact 021.wav" id="3_20uk7"]
+
+[resource]
+script = ExtResource("1_wvohp")
+weapon_name = "Shotgun"
+animation_name = "grenade_launcher"
+fire_delay = 0.7
+damage = 1
+max_ammo = 8
+spread = 15.0
+bullets = 6
+muzzle_locations = Array[Vector2]([Vector2(12, 6)])
+bullet_instance = ExtResource("1_20uk7")
+sound = ExtResource("3_20uk7")
+metadata/_custom_type_script = "uid://bbo57s7n26tp1"

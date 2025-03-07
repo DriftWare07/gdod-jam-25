@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=3 uid="uid://fmle7f4rma3g"]
+
+[ext_resource type="Script" uid="uid://yocg7pcwe8r4" path="res://scripts/linetrail.gd" id="1_hs06j"]
+[ext_resource type="Script" uid="uid://dqhqqnj3acgqu" path="res://assets/weapons/grenade.gd" id="1_qv6bv"]
+
+[sub_resource type="Animation" id="Animation_0msge"]
+resource_name = "flash"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flash:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("line_trail:default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26273),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hs06j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flash:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("line_trail:default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qv6bv"]
+_data = {
+&"RESET": SubResource("Animation_hs06j"),
+&"flash": SubResource("Animation_0msge")
+}
+
+[sub_resource type="Curve" id="Curve_qv6bv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.504914), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hs06j"]
+
+[node name="Grenade" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+linear_damp = 1.0
+script = ExtResource("1_qv6bv")
+
+[node name="flash" type="Polygon2D" parent="."]
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(0, -8, 8, 0, 0, 8, -8, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qv6bv")
+}
+autoplay = "flash"
+
+[node name="line_trail" type="Line2D" parent="."]
+width = 8.0
+width_curve = SubResource("Curve_qv6bv")
+script = ExtResource("1_hs06j")
+metadata/_custom_type_script = "uid://yocg7pcwe8r4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hs06j")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bxv2wq14mx3ta"]
+[gd_scene load_steps=22 format=3 uid="uid://bxv2wq14mx3ta"]
 
 [ext_resource type="SpriteFrames" uid="uid://cjje8uhj174is" path="res://scenes/player/gunframes.tres" id="1_6j4yv"]
 [ext_resource type="Script" uid="uid://drkvn6cipqsf2" path="res://scenes/bullets/weapon_drop.gd" id="1_evoxe"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://p4hljsvfcd10" path="res://assets/weapons/pistol.tres" id="3_n4j5l"]
 [ext_resource type="Resource" uid="uid://c07we68aw1pgt" path="res://assets/weapons/dual_pistols.tres" id="4_ajss5"]
 [ext_resource type="Resource" uid="uid://db650owq8hjwn" path="res://assets/weapons/machine_gun.tres" id="5_w5pn2"]
+[ext_resource type="Resource" uid="uid://dgf6oxn4mdcmh" path="res://assets/weapons/shotgun.tres" id="6_pta12"]
 [ext_resource type="AudioStream" uid="uid://nw8v3x2wulxp" path="res://assets/sounds/155388__woodmoose__guncock.wav" id="7_hyy2l"]
 [ext_resource type="Shader" uid="uid://s1hr76naah3w" path="res://scenes/bullets/shine.gdshader" id="8_4vup0"]
 [ext_resource type="Texture2D" uid="uid://dcy0ab042i50b" path="res://assets/spawn.png" id="9_htqiy"]
@@ -77,7 +78,7 @@ scale_curve = SubResource("CurveTexture_kvlxm")
 
 [node name="WeaponDrop" type="Area2D"]
 script = ExtResource("1_evoxe")
-weapon_drops = Array[ExtResource("2_khook")]([ExtResource("3_n4j5l"), ExtResource("4_ajss5"), ExtResource("5_w5pn2")])
+weapon_drops = Array[ExtResource("2_khook")]([ExtResource("3_n4j5l"), ExtResource("4_ajss5"), ExtResource("5_w5pn2"), ExtResource("6_pta12")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 100

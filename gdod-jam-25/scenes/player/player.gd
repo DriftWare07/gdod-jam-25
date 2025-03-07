@@ -52,23 +52,26 @@ func update_weapons():
 	gunsprite.play(weapon.animation_name)
 	
 	if Input.is_action_pressed("shoot") and can_shoot and Global.can_control:
-		var i = weapon.bullet_instance.instantiate()
-		$body/muzzle.position = weapon.muzzle_locations.pick_random()
-		get_tree().root.add_child(i)
-		i.global_position = $body/muzzle.global_position
-		i.damage = weapon.damage
-		i.look_at(get_global_mouse_position())
 		
-		var sstream = AudioStreamPlayer.new()
-		add_child(sstream)
-		sstream.stream = weapon.sound
-		sstream.volume_db = -10.0
-		sstream.bus = AudioServer.get_bus_name(2)
-		sstream.play()
-		sstream.finished.connect(sstream.queue_free)
-		
-		bullet_sound.play()
-		
+		for b in range(weapon.bullets):
+			var i = weapon.bullet_instance.instantiate()
+			$body/muzzle.position = weapon.muzzle_locations.pick_random()
+			get_tree().root.add_child(i)
+			i.global_position = $body/muzzle.global_position
+			i.damage = weapon.damage
+			i.look_at(get_global_mouse_position())
+			i.rotation_degrees += randf_range(-weapon.spread,weapon.spread)
+			
+			var sstream = AudioStreamPlayer.new()
+			add_child(sstream)
+			sstream.stream = weapon.sound
+			sstream.volume_db = -10.0
+			sstream.bus = AudioServer.get_bus_name(2)
+			sstream.play()
+			sstream.finished.connect(sstream.queue_free)
+			
+			bullet_sound.play()
+			
 		ammo -= 1
 		
 		can_shoot = false
@@ -114,4 +117,4 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_to_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	if hp.is_dead: get_tree().change_scene_to_file("res://scenes/menu.tscn")
