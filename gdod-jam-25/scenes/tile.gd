@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	for area in areas:
 		if area is hitbox:
 			if !area.is_in_group("player"): area.kill()
-			elif area.is_in_group("player"):
+			elif area.is_in_group("player") and Global.can_control:
 				area.damage(15)
 				area.get_parent().start_fall()
 

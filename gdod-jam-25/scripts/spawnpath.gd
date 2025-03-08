@@ -9,7 +9,7 @@ extends PathFollow2D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func spawn() -> void:
 	
-	var amount = randi_range(1,3)
+	var amount = randi_range(1,1)
 	for i in range(amount):
 		var e = enemies.pick_random().instantiate()
 		progress_ratio = randf_range(0,1)

@@ -24,3 +24,4 @@ func _process(delta: float) -> void:
 	hpbar.value = lerp(hpbar.value, hp.health+1.0, delta*5)
 	chargebar.value = lerp(chargebar.value, Global.TileMapParent.elevator_charge, delta*5)
 	$healthPanel/score.text = "Score: "+str(Global.current_score)
+	$healthPanel/floor.text = "Floor: "+str(Global.TileMapParent.current_floor+1)

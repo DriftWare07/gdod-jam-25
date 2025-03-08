@@ -306,6 +306,15 @@ offset_right = 311.0
 offset_bottom = 213.0
 text = "Score:"
 
+[node name="floor" type="RichTextLabel" parent="CanvasLayer/Control/healthPanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 181.0
+offset_right = 311.0
+offset_bottom = 250.0
+text = "Floor
+"
+
 [node name="gameover" type="ColorRect" parent="CanvasLayer/Control"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
